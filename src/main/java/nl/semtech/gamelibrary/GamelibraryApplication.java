@@ -23,7 +23,11 @@ public class GamelibraryApplication {
         games = new ArrayList<>();
         franchises = new ArrayList<>();
 
-        games.add(new Game("Semih", 1));
+        Game game = new Game();
+        game.setName("test");
+        game.setPrice(0);
+
+        games.add(game);
     }
 
 }
