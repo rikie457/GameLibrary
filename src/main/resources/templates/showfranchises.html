@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All games</title>
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}">
+</head>
+<body>
+<div th:if="${franchises.empty}">
+    <a> No franchises Available </a>
+</div>
+<div class="row">
+    <div class="box" th:each="franchise : ${franchises}">
+        <b><span th:text="${franchise.name}"> name </span></b>
+        <b><span th:text="${franchise.games}"> amount of games </span></b>
+    </div>
+</div>
+</body>
+</html>

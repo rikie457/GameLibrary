@@ -4,10 +4,18 @@ import java.util.ArrayList;
 
 public class Franchise {
     private String name;
-    private ArrayList<Game> games;
+    public ArrayList<Game> games;
 
     public Franchise(String name, ArrayList<Game> games) {
         this.name = name;
         this.games = games;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getGamesCount() {
+        return games.size();
     }
 }

@@ -10,4 +10,16 @@ public class Genre {
         this.name = name;
         this.franchises = franchises;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getFranchisesCount() {
+        return franchises.size();
+    }
+
+    public ArrayList<Franchise> getFranchises() {
+        return franchises;
+    }
 }
