@@ -19,6 +19,11 @@ public class GamelibraryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(GamelibraryApplication.class, args);
+        genres = new ArrayList<>();
+        games = new ArrayList<>();
+        franchises = new ArrayList<>();
+
+        games.add(new Game("Semih", 1));
     }
 
 }
