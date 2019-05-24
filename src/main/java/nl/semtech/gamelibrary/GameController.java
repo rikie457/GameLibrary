@@ -15,23 +15,21 @@ public class GameController {
     @GetMapping("/games")
     public String showGames(Model model){
         model.addAttribute("games", GamelibraryApplication.games);
-        return "showgames";
+        return "game/showgames";
     }
 
     @GetMapping("/game/add")
-    public String sendGameForm(Game game){
+    public String sendGameForm(Game game, Model model){
+        model.addAttribute("franchises", GamelibraryApplication.franchises);
         return "game/newgame";
     }
 
     @PostMapping("/game/add")
-    public String processGameForm(Model model, @Valid Game game, BindingResult bindingResult){
+    public String processGameForm(@Valid Game game, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "game/newgame";
         }
-
-        model.addAttribute("message", "Following game added");
-        model.addAttribute("addedobject", game);
-        return "showmessage";
+        return "redirect:/games";
     }
 
 }

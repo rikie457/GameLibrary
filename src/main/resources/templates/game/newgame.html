@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -9,17 +8,27 @@
 <form action="*" th:action="@{/game/add}" th:object="${game}" method="post">
     <table>
         <tr>
-            <td>Title:</td>
-            <td><input type="text" th:field="*{name}" /></td>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
             <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
         </tr>
         <tr>
-            <td>Content:</td>
-            <td><input type="number" th:field="*{price}" /></td>
+            <td>Price:</td>
+            <td><input type="number" th:field="*{price}"/></td>
             <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</td>
         </tr>
         <tr>
-            <td><button type="submit">Submit post</button></td>
+            <td>Franchise</td>
+            <td>
+                <select>
+                <option th:each="franchise : ${franchises}" th:text="${franchise.name}" th:value="${franchise.name}"/>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
         </tr>
     </table>
 </form>

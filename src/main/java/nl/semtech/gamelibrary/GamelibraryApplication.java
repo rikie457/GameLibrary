@@ -23,11 +23,23 @@ public class GamelibraryApplication {
         games = new ArrayList<>();
         franchises = new ArrayList<>();
 
+        Franchise franchise = new Franchise();
+        franchise.setName("Call of duty");
+
         Game game = new Game();
         game.setName("test");
         game.setPrice(0);
 
+        Game game1 = new Game();
+        game1.setName("test1");
+        game1.setPrice(1);
+
+        franchises.add(franchise);
+
         games.add(game);
+        games.add(game1);
+
+
     }
 
 }
