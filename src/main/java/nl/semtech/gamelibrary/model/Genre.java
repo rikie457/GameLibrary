@@ -10,10 +10,6 @@ public class Genre {
     private ArrayList<Franchise> franchises;
 
 
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
