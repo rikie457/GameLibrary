@@ -1,15 +1,18 @@
 package nl.semtech.gamelibrary;
 
+
 import nl.semtech.gamelibrary.model.Franchise;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
+import nl.semtech.gamelibrary.model.Genre;
+import org.springframework.ui.Model;
 
 @Controller
 public class FranchiseController {
+
 
     @GetMapping("/franchise/add")
     public String sendFranchiseForm(Franchise franchise){
@@ -23,5 +26,10 @@ public class FranchiseController {
         }
         return "redirect:/franchises";
     }
-
+    @GetMapping("/franchise")
+    public String showFranchises(Model model, @RequestParam String name){
+        Genre genre = GamelibraryApplication.findGenreByName(name);
+        model.addAttribute("franchises", genre.getFranchises());
+        return "showfranchises";
+    }
 }

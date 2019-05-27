@@ -1,12 +1,15 @@
 package nl.semtech.gamelibrary;
 
+
 import nl.semtech.gamelibrary.model.Genre;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.Valid;
+import org.springframework.ui.Model;
+
+
 
 @Controller
 public class GenreController {
@@ -22,5 +25,10 @@ public class GenreController {
             return "genre/newgenre";
         }
         return "redirect:/genre";
+
+    @GetMapping("/genres")
+    public String showGenres(Model model){
+        model.addAttribute("genres", GamelibraryApplication.genres);
+        return "showgenres";
     }
 }

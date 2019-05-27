@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All genres</title>
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/style.css}">
+</head>
+<body>
+<div th:if="${genres.empty}">
+    <a> No genres Available </a>
+</div>
+<div class="row">
+    <div class="box" th:each="genre : ${genres}">
+        <b><span th:text="${genre.name}"> name </span></b>
+        <b><span th:text="${genre.getFranchisesCount()}"> amount of franchises </span></b>
+    </div>
+</div>
+</body>
+</html>

@@ -16,9 +16,13 @@ public class Franchise {
     public String getName() {
         return name;
     }
-
+  
     public void addGameToList(Game game) {
         games.add(game);
+    }
+
+    public int getGamesCount() {
+        return games.size();
     }
 
 }

@@ -39,7 +39,14 @@ public class GamelibraryApplication {
         games.add(game);
         games.add(game1);
 
-
     }
 
+    public static Genre findGenreByName(String name){
+        for (Genre genre : genres){
+            if (genre.getName().equals(name)){
+                return genre;
+            }
+        }
+        return null;
+    }
 }
