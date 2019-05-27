@@ -1,13 +1,13 @@
 package nl.semtech.gamelibrary.model;
 
-public class Game {
-    private String name;
-    private double price;
+import javax.validation.constraints.Size;
 
-    public Game(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
+public class Game {
+
+    @Size(min = 2, max = 20)
+    private String name;
+
+    private double price;
 
     public String getName() {
         return name;
@@ -15,5 +15,13 @@ public class Game {
 
     public double getPrice() {
         return price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

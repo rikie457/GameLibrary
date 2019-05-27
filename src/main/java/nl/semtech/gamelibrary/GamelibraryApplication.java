@@ -23,17 +23,22 @@ public class GamelibraryApplication {
         games = new ArrayList<>();
         franchises = new ArrayList<>();
 
-        games.add(new Game("Semih", 1));
-        Franchise franchise1 = new Franchise("Call of duty", new ArrayList<>());
-        Franchise franchise2 = new Franchise("Hello Kitty", new ArrayList<>());
-        franchises.add(franchise1);
-        franchises.add(franchise2);
-        genres.add(new Genre("FPS", franchises));
-        genres.add(new Genre("Puzzle", new ArrayList<>()));
-        genres.add(new Genre("Indie", new ArrayList<>()));
-        genres.add(new Genre("Simulation", new ArrayList<>()));
-        genres.add(new Genre("Adventure", new ArrayList<>()));
-        genres.add(new Genre("Creative", new ArrayList<>()));
+        Franchise franchise = new Franchise();
+        franchise.setName("Call of duty");
+
+        Game game = new Game();
+        game.setName("test");
+        game.setPrice(0);
+
+        Game game1 = new Game();
+        game1.setName("test1");
+        game1.setPrice(1);
+
+        franchises.add(franchise);
+
+        games.add(game);
+        games.add(game1);
+
     }
 
     public static Genre findGenreByName(String name){
