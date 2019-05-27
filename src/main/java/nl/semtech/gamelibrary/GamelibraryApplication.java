@@ -37,17 +37,20 @@ public class GamelibraryApplication {
         Genre fps = new Genre();
         fps.setName("FPS");
 
+        franchise.addGameToFranchise(game);
+        franchise.addGameToFranchise(game1);
+        fps.addFranchiseToGenre(franchise);
+
         franchises.add(franchise);
         genres.add(fps);
-
         games.add(game);
         games.add(game1);
 
     }
 
-    public static Genre findGenreByName(String name){
-        for (Genre genre : genres){
-            if (genre.getName().equals(name)){
+    public static Genre findGenreByName(String name) {
+        for (Genre genre : genres) {
+            if (genre.getName().equals(name)) {
                 return genre;
             }
         }

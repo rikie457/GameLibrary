@@ -12,7 +12,7 @@
 <div class="row">
     <div class="box" th:each="franchise : ${franchises}">
         <b><span th:text="${franchise.name}"> name </span></b>
-        <b><span th:text="${franchise.games}"> amount of games </span></b>
+        <b><span th:text="${franchise.getGamesCount()}"> amount of games </span></b>
     </div>
 </div>
 </body>

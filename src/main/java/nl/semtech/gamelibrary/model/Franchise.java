@@ -16,8 +16,11 @@ public class Franchise {
     public String getName() {
         return name;
     }
-  
-    public void addGameToList(Game game) {
+
+    public void addGameToFranchise(Game game) {
+        if (this.games == null) {
+            this.games = new ArrayList<>();
+        }
         games.add(game);
     }
 

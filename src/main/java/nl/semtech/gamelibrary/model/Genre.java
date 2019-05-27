@@ -18,6 +18,13 @@ public class Genre {
         return name;
     }
 
+    public void addFranchiseToGenre(Franchise franchise){
+        if(this.franchises == null){
+            this.franchises = new ArrayList<>();
+        }
+        this.franchises.add(franchise);
+    }
+
     public int getFranchisesCount() {
         return franchises.size();
     }
