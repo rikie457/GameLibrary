@@ -34,7 +34,11 @@ public class GamelibraryApplication {
         game1.setName("test1");
         game1.setPrice(1);
 
+        Genre fps = new Genre();
+        fps.setName("FPS");
+
         franchises.add(franchise);
+        genres.add(fps);
 
         games.add(game);
         games.add(game1);

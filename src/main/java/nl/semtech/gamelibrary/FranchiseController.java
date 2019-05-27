@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import nl.semtech.gamelibrary.model.Genre;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class FranchiseController {
@@ -26,7 +27,7 @@ public class FranchiseController {
         }
         return "redirect:/franchises";
     }
-    @GetMapping("/franchise")
+    @GetMapping("/genre")
     public String showFranchises(Model model, @RequestParam String name){
         Genre genre = GamelibraryApplication.findGenreByName(name);
         model.addAttribute("franchises", genre.getFranchises());

@@ -25,6 +25,7 @@ public class GenreController {
             return "genre/newgenre";
         }
         return "redirect:/genre";
+    }
 
     @GetMapping("/genres")
     public String showGenres(Model model){
