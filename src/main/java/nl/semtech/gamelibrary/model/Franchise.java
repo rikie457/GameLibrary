@@ -1,21 +1,31 @@
 package nl.semtech.gamelibrary.model;
 
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 public class Franchise {
+    @Size(min = 2, max = 20)
     private String name;
-    public ArrayList<Game> games;
 
-    public Franchise(String name, ArrayList<Game> games) {
+    private ArrayList<Game> games;
+
+    public void setName(String name) {
         this.name = name;
-        this.games = games;
     }
 
     public String getName() {
         return name;
     }
 
+    public void addGameToFranchise(Game game) {
+        if (this.games == null) {
+            this.games = new ArrayList<>();
+        }
+        games.add(game);
+    }
+
     public int getGamesCount() {
         return games.size();
     }
+
 }
