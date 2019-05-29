@@ -43,15 +43,35 @@ public class GamelibraryApplication {
 
         franchises.add(franchise);
         genres.add(fps);
+        game.setId(games.size() + 1);
+        game.setFranchise(franchise);
         games.add(game);
         games.add(game1);
 
     }
 
-    public static Genre findGenreByName(String name) {
+    public static Genre findGenreById(int id) {
         for (Genre genre : genres) {
-            if (genre.getName().equals(name)) {
+            if (genre.getId() == id) {
                 return genre;
+            }
+        }
+        return null;
+    }
+
+    public static Franchise findFranchiseById(int id) {
+        for (Franchise franchise : franchises) {
+            if (franchise.getId() == id) {
+                return franchise;
+            }
+        }
+        return null;
+    }
+
+    public static Game findGameById(int id) {
+        for (Game game : games) {
+            if (game.getId() == id) {
+                return game;
             }
         }
         return null;

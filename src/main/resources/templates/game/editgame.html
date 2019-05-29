@@ -25,7 +25,8 @@
             <td>Franchise</td>
             <td>
                 <select name="franchise">
-                    <option th:each="franchise : ${franchises}" th:text="${franchise.name}" th:value="${franchise.id}"></option>
+                    <option th:each="franchise : ${franchises}" th:text="${franchise.name}"
+                            th:value="${franchise.id}" th:selected="${franchise.id == editfranchise.id}"></option>
                 </select>
             </td>
         </tr>

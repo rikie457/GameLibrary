@@ -6,9 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import javax.validation.Valid;
-import org.springframework.ui.Model;
 
+import javax.validation.Valid;
+
+import org.springframework.ui.Model;
 
 
 @Controller
@@ -24,11 +25,13 @@ public class GenreController {
         if (bindingResult.hasErrors()) {
             return "genre/newgenre";
         }
-        return "redirect:/genre";
+        genre.setId(GamelibraryApplication.genres.size() + 1);
+        GamelibraryApplication.genres.add(genre);
+        return "redirect:/genres";
     }
 
     @GetMapping("/genres")
-    public String showGenres(Model model){
+    public String showGenres(Model model) {
         model.addAttribute("genres", GamelibraryApplication.genres);
         return "showgenres";
     }
