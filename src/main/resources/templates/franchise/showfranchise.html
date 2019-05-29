@@ -11,7 +11,9 @@
 <body>
 <div class="row">
     <div class="box" th:each="game : ${franchise.getGames()}">
-        <b><span th:text="${game.getName()}"> name </span></b>
+        <a th:href="@{'game?name=' + ${game.name}}" class="box">
+            <b><span th:text="${game.getName()}"> name </span></b>
+        </a>
     </div>
 </div>
 </body>
