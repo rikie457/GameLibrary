@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/@thymesVar id="franchise" type="nl.semtech.gamelibrary.model.Franchise"/-->
+<!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
+<!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+<head>
+    <meta charset="UTF-8">
+    <title>All games</title>
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+</head>
+<body>
+<div class="row">
+    <div class="box" th:each="game : ${franchise.getGames()}">
+        <b><span th:text="${game.getName()}"> name </span></b>
+    </div>
+</div>
+</body>
+</html>

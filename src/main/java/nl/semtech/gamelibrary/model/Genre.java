@@ -26,7 +26,7 @@ public class Genre {
     }
 
     public int getFranchisesCount() {
-        return franchises.size();
+        return this.franchises.size();
     }
 
     public ArrayList<Franchise> getFranchises() {

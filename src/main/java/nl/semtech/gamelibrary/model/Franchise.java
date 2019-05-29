@@ -14,18 +14,21 @@ public class Franchise {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void addGameToFranchise(Game game) {
         if (this.games == null) {
             this.games = new ArrayList<>();
         }
-        games.add(game);
+        this.games.add(game);
     }
 
     public int getGamesCount() {
-        return games.size();
+        return this.games.size();
     }
 
+    public ArrayList<Game> getGames(){
+        return this.games;
+    }
 }

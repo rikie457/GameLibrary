@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -32,4 +33,13 @@ public class GameController {
         return "redirect:/games";
     }
 
+    @GetMapping("game")
+    public String showGame(Model model, @RequestParam String name){
+        Game game = GamelibraryApplication.findGameByName(name);
+        if (game == null){
+            return "redirect:/games";
+        }
+        model.addAttribute("game", game);
+        return "game/showgame";
+    }
 }

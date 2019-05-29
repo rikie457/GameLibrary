@@ -27,10 +27,20 @@ public class FranchiseController {
         }
         return "redirect:/franchises";
     }
-    @GetMapping("/genre")
-    public String showFranchises(Model model, @RequestParam String name){
-        Genre genre = GamelibraryApplication.findGenreByName(name);
-        model.addAttribute("franchises", genre.getFranchises());
-        return "showfranchises";
+
+    @GetMapping("/franchises")
+    public String showFranchises(Model model){
+        model.addAttribute("franchises", GamelibraryApplication.franchises);
+        return "franchise/showfranchises";
+    }
+
+    @GetMapping("/franchise")
+    public String showFranchise(Model model, @RequestParam String name){
+        Franchise franchise = GamelibraryApplication.findFranchiseByName(name);
+        if (franchise == null){
+            return "redirect:/franchises";
+        }
+        model.addAttribute("franchise", franchise);
+        return "franchise/showfranchise";
     }
 }

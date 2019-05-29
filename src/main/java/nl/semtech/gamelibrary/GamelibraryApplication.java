@@ -24,15 +24,15 @@ public class GamelibraryApplication {
         franchises = new ArrayList<>();
 
         Franchise franchise = new Franchise();
-        franchise.setName("Call of duty");
+        franchise.setName("Call of Duty");
 
         Game game = new Game();
-        game.setName("test");
-        game.setPrice(0);
+        game.setName("Call of Duty: Modern Warfare");
+        game.setPrice(30.99);
 
         Game game1 = new Game();
-        game1.setName("test1");
-        game1.setPrice(1);
+        game1.setName("Call of Duty: Black Ops 1");
+        game1.setPrice(59.99);
 
         Genre fps = new Genre();
         fps.setName("FPS");
@@ -45,13 +45,30 @@ public class GamelibraryApplication {
         genres.add(fps);
         games.add(game);
         games.add(game1);
-
     }
 
     public static Genre findGenreByName(String name) {
         for (Genre genre : genres) {
             if (genre.getName().equals(name)) {
                 return genre;
+            }
+        }
+        return null;
+    }
+
+    public static Franchise findFranchiseByName(String name) {
+        for (Franchise franchise : franchises) {
+            if (franchise.getName().equals(name)) {
+                return franchise;
+            }
+        }
+        return null;
+    }
+
+    public static Game findGameByName(String name) {
+        for (Game game : games) {
+            if (game.getName().equals(name)) {
+                return game;
             }
         }
         return null;
