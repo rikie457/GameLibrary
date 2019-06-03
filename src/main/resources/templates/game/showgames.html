@@ -8,17 +8,19 @@
 <table>
     <thead>
     <tr>
-        <th> Name </th>
-        <th> Price </th>
+        <th> Name</th>
+        <th> Price</th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${games.empty}">
-        <td colspan="2"> No Games Available </td>
+        <td colspan="2"> No Games Available</td>
     </tr>
     <tr th:each="game : ${games}">
-        <td><span th:text="${game.name}"> name </span></td>
-        <td><span th:text="${game.price}"> price </span></td>
+        <a th:href="@{'game?name=' + ${game.name}}" class="box">
+            <td><span th:text="${game.name}"> name </span></td>
+            <td><span th:text="${game.price}"> price </span></td>
+        </a>
     </tr>
     </tbody>
 </table>

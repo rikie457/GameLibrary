@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/@thymesVar id="franchises" type="nl.semtech.gamelibrary.model.Franchise"/-->
+<!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
+<!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+<head>
+    <meta charset="UTF-8">
+    <title>All franchises</title>
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+</head>
+<body>
+<div th:if="${franchises.empty}">
+    <a> No franchises Available </a>
+</div>
+<div class="row">
+    <div class="box" th:each="franchise : ${franchises}">
+        <a th:href="@{'franchise?name=' + ${franchise.name}}" class="box">
+        <b><span th:text="${franchise.getName()}"> name </span></b>
+        <b><span th:text="${franchise.getGamesCount()}"> amount of games </span></b>
+        </a>
+    </div>
+</div>
+</body>
+</html>
