@@ -26,6 +26,9 @@ public class GamelibraryApplication {
         Franchise franchise = new Franchise();
         franchise.setName("Call of duty");
 
+        Franchise franchise1 = new Franchise();
+        franchise1.setName("Hello kitty");
+
         Game game = new Game();
         game.setName("test");
         game.setPrice(0);
@@ -37,16 +40,35 @@ public class GamelibraryApplication {
         Genre fps = new Genre();
         fps.setName("FPS");
 
+        game.setFranchise(franchise);
+        game1.setFranchise(franchise1);
+
         franchise.addGameToFranchise(game);
-        franchise.addGameToFranchise(game1);
+        franchise1.addGameToFranchise(game1);
+        franchise.setGenre(fps);
+        franchise1.setGenre(fps);
         fps.addFranchiseToGenre(franchise);
+        fps.addFranchiseToGenre(franchise1);
 
         franchises.add(franchise);
+        franchise.setId(franchises.size());
+
+        franchises.add(franchise1);
+        franchise1.setId(franchises.size());
+
         genres.add(fps);
-        game.setId(games.size() + 1);
-        game.setFranchise(franchise);
+        fps.setId(genres.size());
+
         games.add(game);
+        game.setId(games.size());
+
         games.add(game1);
+        game1.setId(games.size());
+
+        game.setFranchise(franchise);
+        game.setFranchiseId(franchise.getId());
+        game1.setFranchise(franchise1);
+        game1.setFranchiseId(franchise1.getId());
 
     }
 

@@ -5,9 +5,8 @@ import nl.semtech.gamelibrary.model.Game;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,32 +26,40 @@ public class GameController {
     }
 
     @PostMapping("/game/add")
-    public String processGameForm(@Valid Game game, BindingResult bindingResult, @RequestParam("franchise") int id) {
+    public String processGameForm(@Valid Game game, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "game/newgame";
         }
-        game.setId(GamelibraryApplication.games.size() + 1);
-        Franchise franchise = GamelibraryApplication.findFranchiseById(id);
+        Franchise franchise = GamelibraryApplication.findFranchiseById(game.getFranchiseId());
         game.setFranchise(franchise);
         franchise.addGameToFranchise(game);
         GamelibraryApplication.games.add(game);
+        game.setId(GamelibraryApplication.games.size());
         return "redirect:/games";
     }
 
-    @GetMapping("/game/edit")
-    public String sendGameEditForm(Model model, @RequestParam("id") int id) {
+    @GetMapping("/game/edit/{id}")
+    public String sendGameEditForm(Model model, @PathVariable("id") int id) {
         Game game = GamelibraryApplication.findGameById(id);
         model.addAttribute("game", game);
-        model.addAttribute("editfranchise", GamelibraryApplication.findFranchiseById(game.getFranchise().getId()));
+        System.out.println(game.toString());
         model.addAttribute("franchises", GamelibraryApplication.franchises);
         return "game/editgame";
     }
 
-    @PostMapping("/game/edit")
-    public String processGameEditForm(@Valid Game game, BindingResult bindingResult, @RequestParam("franchise") int id) {
+    @PutMapping("/game/edit/")
+    public String processGameEditForm(@Valid Game game, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "game/editgame";
         }
+        System.out.println(game.getFranchise());
+//        Franchise franchise = GamelibraryApplication.findFranchiseById(game.getFranchiseId());
+//        if(game.getFranchise() != franchise){
+//            Franchise oldFranchise = game.getFranchise();
+//            oldFranchise.deleteGameFromFranchise(game);
+//            game.setFranchise(franchise);
+//            franchise.addGameToFranchise(game);
+//        }
 
         return "redirect:/games";
     }

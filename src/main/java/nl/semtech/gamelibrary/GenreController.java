@@ -25,8 +25,8 @@ public class GenreController {
         if (bindingResult.hasErrors()) {
             return "genre/newgenre";
         }
-        genre.setId(GamelibraryApplication.genres.size() + 1);
         GamelibraryApplication.genres.add(genre);
+        genre.setId(GamelibraryApplication.genres.size());
         return "redirect:/genres";
     }
 

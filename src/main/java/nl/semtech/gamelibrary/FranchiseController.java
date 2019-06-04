@@ -28,11 +28,12 @@ public class FranchiseController {
         if (bindingResult.hasErrors()) {
             return "franchise/newfranchise";
         }
-        franchise.setId(GamelibraryApplication.franchises.size() + 1);
+
         Genre genre = GamelibraryApplication.findGenreById(id);
         franchise.setGenre(genre);
         genre.addFranchiseToGenre(franchise);
         GamelibraryApplication.franchises.add(franchise);
+        franchise.setId(GamelibraryApplication.franchises.size());
         return "redirect:/franchises";
     }
 

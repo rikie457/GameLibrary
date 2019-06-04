@@ -3,6 +3,9 @@ package nl.semtech.gamelibrary.model;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
+/**
+ * The type Genre.
+ */
 public class Genre {
     @Size(min = 2, max = 20)
     private String name;
@@ -44,5 +47,14 @@ public class Genre {
 
     public ArrayList<Franchise> getFranchises() {
         return franchises;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", franchises=" + getFranchisesCount() +
+                '}';
     }
 }

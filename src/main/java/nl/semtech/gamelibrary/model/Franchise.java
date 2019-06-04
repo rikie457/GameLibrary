@@ -36,6 +36,12 @@ public class Franchise {
         games.add(game);
     }
 
+    public void deleteGameFromFranchise(Game game){
+        if(this.games != null && this.games.contains(game)) {
+            this.games.remove(game);
+        }
+    }
+
     public int getGamesCount() {
         if (this.games == null) {
             return 0;
@@ -51,5 +57,13 @@ public class Franchise {
         return genre;
     }
 
-
+    @Override
+    public String toString() {
+        return "Franchise{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", genre=" + genre.toString() +
+                ", games=" + getGamesCount() +
+                '}';
+    }
 }

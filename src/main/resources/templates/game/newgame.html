@@ -24,10 +24,12 @@
         <tr>
             <td>Franchise</td>
             <td>
-                <select name="franchise">
+                <select th:field="*{franchiseId}">
                     <option th:each="franchise : ${franchises}" th:text="${franchise.name}" th:value="${franchise.id}"></option>
                 </select>
+
             </td>
+            <td th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchise}">Content error message</td>
         </tr>
         <tr>
             <td>

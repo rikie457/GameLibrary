@@ -9,8 +9,12 @@
     <title>Add game</title>
 </head>
 <body>
-<form action="*" th:action="@{/game/add}" th:object="${game}" method="post">
+<form action="*" th:action="@{/game/edit/}" th:object="${game}" th:method="put">
     <table>
+        <tr>
+            <td>Id:</td>
+            <td><p th:text="*{id}">Id column</p></td>
+        </tr>
         <tr>
             <td>Name:</td>
             <td><input type="text" th:field="*{name}"/></td>
@@ -24,11 +28,13 @@
         <tr>
             <td>Franchise</td>
             <td>
-                <select name="franchise">
-                    <option th:each="franchise : ${franchises}" th:text="${franchise.name}"
-                            th:value="${franchise.id}" th:selected="${franchise.id == editfranchise.id}"></option>
+                <select th:field="*{franchise}">
+                    <option th:each="franchise : ${franchises}"  th:text="${franchise.name}"
+                            th:value="${franchise}" th:selected="${franchise.id} == *{franchiseId}"></option>
                 </select>
+
             </td>
+            <td th:if="${#fields.hasErrors('franchise')}" th:errors="*{franchise.id}">Content error message</td>
         </tr>
         <tr>
             <td>
