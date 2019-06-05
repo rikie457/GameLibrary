@@ -4,7 +4,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 public class Franchise {
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 30)
     private String name;
 
     private int id;
@@ -30,11 +30,7 @@ public class Franchise {
     public void setId(int id) {
         this.id = id;
     }
-  
-    public String getName() {
-        return this.name;
 
-    }
 
     public void addGameToFranchise(Game game) {
         if (this.games == null) {

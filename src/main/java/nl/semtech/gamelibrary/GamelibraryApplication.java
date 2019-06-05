@@ -44,9 +44,6 @@ public class GamelibraryApplication {
         Genre adventure = new Genre();
         adventure.setName("Adventure");
 
-        game.setFranchise(nonefr);
-        game1.setFranchise(franchise1);
-
         franchises.add(nonefr);
         none.setId(franchises.size());
 
@@ -84,6 +81,15 @@ public class GamelibraryApplication {
     public static Genre findGenreById(int id) {
         for (Genre genre : genres) {
             if (genre.getId() == id) {
+                return genre;
+            }
+        }
+        return null;
+    }
+
+    public static Genre findGenreByName(String name) {
+        for (Genre genre : genres) {
+            if (genre.getName().equals(name)) {
                 return genre;
             }
         }

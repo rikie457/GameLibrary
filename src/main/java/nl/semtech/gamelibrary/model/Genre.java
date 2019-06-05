@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * The type Genre.
  */
 public class Genre {
-    @Size(min = 2, max = 20)
+    @Size(min = 2, max = 30)
     private String name;
 
     private int id;
