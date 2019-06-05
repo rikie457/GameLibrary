@@ -26,8 +26,9 @@ public class GameController {
     }
 
     @PostMapping("/game/add")
-    public String processGameForm(@Valid Game game, BindingResult bindingResult) {
+    public String processGameForm(@Valid Game game, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("franchises", GamelibraryApplication.franchises);
             return "game/newgame";
         }
         Franchise franchise = GamelibraryApplication.findFranchiseById(game.getFranchiseId());
@@ -42,26 +43,25 @@ public class GameController {
     public String sendGameEditForm(Model model, @PathVariable("id") int id) {
         Game game = GamelibraryApplication.findGameById(id);
         model.addAttribute("game", game);
-        System.out.println(game.toString());
         model.addAttribute("franchises", GamelibraryApplication.franchises);
         return "game/editgame";
     }
 
-    @PutMapping("/game/edit/")
-    public String processGameEditForm(@Valid Game game, BindingResult bindingResult) {
+    @PostMapping("/game/edit/{id}")
+    public String processGameEditForm(@PathVariable("id") int id, @Valid @ModelAttribute Game game, BindingResult bindingResult, @RequestParam("oldfranchiseid") int oldfranchiseid, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("franchises", GamelibraryApplication.franchises);
             return "game/editgame";
         }
-        System.out.println(game.getFranchise());
-//        Franchise franchise = GamelibraryApplication.findFranchiseById(game.getFranchiseId());
-//        if(game.getFranchise() != franchise){
-//            Franchise oldFranchise = game.getFranchise();
-//            oldFranchise.deleteGameFromFranchise(game);
-//            game.setFranchise(franchise);
-//            franchise.addGameToFranchise(game);
-//        }
+        GamelibraryApplication.updateGame(id, game, oldfranchiseid);
 
         return "redirect:/games";
     }
 
+    @GetMapping("game/delete/{id}")
+    public String deleteGame(@PathVariable("id") int id) {
+        GamelibraryApplication.deleteGame(id);
+
+        return "redirect:/games";
+    }
 }

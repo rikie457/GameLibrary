@@ -22,7 +22,6 @@ public class Genre {
         this.name = name;
     }
 
-
     public int getId() {
         return id;
     }
@@ -38,9 +37,15 @@ public class Genre {
         this.franchises.add(franchise);
     }
 
+    public void deleteFranchiseFromGenre(Franchise franchise) {
+        if (this.franchises != null && this.franchises.contains(franchise)) {
+            this.franchises.remove(franchise);
+        }
+    }
+
     public int getFranchisesCount() {
-        if(this.franchises == null){
-               return 0;
+        if (this.franchises == null) {
+            return 0;
         }
         return franchises.size();
     }

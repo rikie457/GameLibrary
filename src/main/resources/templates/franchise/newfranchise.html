@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="franchise" type="nl.semtech.gamelibrary.model.Franchise"*/-->
-<!--/*@thymesVar id="activeProfiles" type="java.lang.String"*/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
 <head>
     <meta charset="UTF-8">
-    <title>Add game</title>
+    <title>Add franchise</title>
 </head>
 <body>
 <form action="*" th:action="@{/franchise/add}" th:object="${franchise}" method="post">
@@ -17,9 +16,10 @@
         </tr>
         <tr>
             <td>Genre:</td>
-            <td><select name="genre">
-                <option  th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+            <td><select th:field="*{genreid}">
+                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
             </select></td>
+            <td th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</td>
         </tr>
         <tr>
             <td>

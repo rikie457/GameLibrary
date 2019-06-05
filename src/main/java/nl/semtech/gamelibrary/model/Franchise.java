@@ -11,6 +11,8 @@ public class Franchise {
 
     private Genre genre;
 
+    private int genreid;
+
     private ArrayList<Game> games;
 
     public String getName() {
@@ -55,6 +57,14 @@ public class Franchise {
 
     public Genre getGenre() {
         return genre;
+    }
+
+    public void setGenreid(int genreid) {
+        this.genreid = genreid;
+    }
+
+    public int getGenreid() {
+        return genreid;
     }
 
     @Override
