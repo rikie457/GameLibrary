@@ -7,14 +7,33 @@ public class Franchise {
     @Size(min = 2, max = 20)
     private String name;
 
+    private int id;
+
+    private Genre genre;
+
+    private int genreid;
+
     private ArrayList<Game> games;
+
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+  
     public String getName() {
         return this.name;
+
     }
 
     public void addGameToFranchise(Game game) {
@@ -24,8 +43,44 @@ public class Franchise {
         this.games.add(game);
     }
 
+    public void deleteGameFromFranchise(Game game){
+        if(this.games != null && this.games.contains(game)) {
+            this.games.remove(game);
+        }
+    }
+
     public int getGamesCount() {
-        return this.games.size();
+        if (this.games == null) {
+            return 0;
+        }
+        return games.size();
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenreid(int genreid) {
+        this.genreid = genreid;
+    }
+
+    public int getGenreid() {
+        return genreid;
+    }
+
+    @Override
+    public String toString() {
+        return "Franchise{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", genre=" + genre.toString() +
+                ", games=" + getGamesCount() +
+                '}';
+
     }
 
     public ArrayList<Game> getGames(){

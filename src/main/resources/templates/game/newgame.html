@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<!--/*@thymesVar id="game" type="nl.semtech.gamelibrary.model.Game"*/-->
+<!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
 <head>
     <meta charset="UTF-8">
     <title>Add game</title>
@@ -20,10 +23,11 @@
         <tr>
             <td>Franchise</td>
             <td>
-                <select>
-                <option th:each="franchise : ${franchises}" th:text="${franchise.name}" th:value="${franchise.name}"/>
-            </select>
+                <select th:field="*{franchiseId}">
+                 <option th:each="franchise : ${franchises}" th:text="${franchise.name}" th:value="${franchise.id}"></option>
+                </select>
             </td>
+            <td th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchise}">Content error message</td>
         </tr>
         <tr>
             <td>
