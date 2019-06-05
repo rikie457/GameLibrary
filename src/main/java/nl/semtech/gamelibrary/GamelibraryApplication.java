@@ -23,6 +23,7 @@ public class GamelibraryApplication {
         games = new ArrayList<>();
         franchises = new ArrayList<>();
 
+
         Franchise nonefr = new Franchise();
         nonefr.setName("No franchise");
 
@@ -30,12 +31,12 @@ public class GamelibraryApplication {
         franchise1.setName("Hello kitty");
 
         Game game = new Game();
-        game.setName("test");
-        game.setPrice(0);
+        game.setName("Call of Duty: Modern Warfare");
+        game.setPrice(30.99);
 
         Game game1 = new Game();
-        game1.setName("test1");
-        game1.setPrice(1);
+        game1.setName("Call of Duty: Black Ops 1");
+        game1.setPrice(59.99);
 
         Genre none = new Genre();
         none.setName("No genre");
@@ -77,6 +78,7 @@ public class GamelibraryApplication {
         none.addFranchiseToGenre(nonefr);
         adventure.addFranchiseToGenre(franchise1);
 
+
     }
 
     public static Genre findGenreById(int id) {
@@ -87,6 +89,7 @@ public class GamelibraryApplication {
         }
         return null;
     }
+
 
     public static void updateGenre(int id, Genre newgenre) {
         Genre genre = findGenreById(id);
@@ -110,6 +113,15 @@ public class GamelibraryApplication {
     public static Franchise findFranchiseById(int id) {
         for (Franchise franchise : franchises) {
             if (franchise.getId() == id) {
+                     return franchise;
+            }
+        }
+        return null;
+    }
+
+    public static Franchise findFranchiseByName(String name) {
+        for (Franchise franchise : franchises) {
+            if (franchise.getName().equals(name)) {
                 return franchise;
             }
         }
@@ -148,11 +160,22 @@ public class GamelibraryApplication {
     public static Game findGameById(int id) {
         for (Game game : games) {
             if (game.getId() == id) {
+              return game;
+           }
+     
+        }
+         return null;
+    }
+      
+    public static Game findGameByName(String name) {
+        for (Game game : games) {
+            if (game.getName().equals(name)) {
                 return game;
             }
         }
         return null;
     }
+
 
     public static void updateGame(int id, Game newgame, int oldfranchiseid) {
         Game game = findGameById(id);

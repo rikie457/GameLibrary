@@ -36,9 +36,20 @@ public class FranchiseController {
     }
 
     @GetMapping("/franchises")
-    public String showfranchises(Model model) {
+    public String showFranchises(Model model){
         model.addAttribute("franchises", GamelibraryApplication.franchises);
-        return "showfranchises";
+        return "franchise/showfranchises";
+    }
+
+    @GetMapping("/franchise")
+    public String showFranchise(Model model, @RequestParam String name){
+        Franchise franchise = GamelibraryApplication.findFranchiseByName(name);
+        if (franchise == null){
+            return "redirect:/franchises";
+        }
+        model.addAttribute("franchise", franchise);
+        return "franchise/showfranchise";
+
     }
 
     @GetMapping("/franchise/edit/{id}")

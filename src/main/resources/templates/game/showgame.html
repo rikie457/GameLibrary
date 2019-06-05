@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/@thymesVar id="game" type="nl.semtech.gamelibrary.model.Game"/-->
+<!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
+<!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${game.getName()}"></title>
+    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+</head>
+<body>
+<div class="row">
+    <b><span th:text="${game.getName()}"> name </span></b>
+    <b><span th:text="${game.getPrice()}"> prijs </span></b>
+</div>
+</body>
+</html>

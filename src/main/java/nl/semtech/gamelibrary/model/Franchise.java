@@ -30,12 +30,17 @@ public class Franchise {
     public void setId(int id) {
         this.id = id;
     }
+  
+    public String getName() {
+        return this.name;
+
+    }
 
     public void addGameToFranchise(Game game) {
         if (this.games == null) {
             this.games = new ArrayList<>();
         }
-        games.add(game);
+        this.games.add(game);
     }
 
     public void deleteGameFromFranchise(Game game){
@@ -75,5 +80,10 @@ public class Franchise {
                 ", genre=" + genre.toString() +
                 ", games=" + getGamesCount() +
                 '}';
+
+    }
+
+    public ArrayList<Game> getGames(){
+        return this.games;
     }
 }

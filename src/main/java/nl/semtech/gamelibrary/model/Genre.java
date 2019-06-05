@@ -47,7 +47,7 @@ public class Genre {
         if (this.franchises == null) {
             return 0;
         }
-        return franchises.size();
+        return this.franchises.size();
     }
 
     public ArrayList<Franchise> getFranchises() {

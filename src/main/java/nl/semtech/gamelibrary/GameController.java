@@ -5,8 +5,11 @@ import nl.semtech.gamelibrary.model.Game;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import javax.validation.Valid;
 
@@ -39,6 +42,7 @@ public class GameController {
         return "redirect:/games";
     }
 
+
     @GetMapping("/game/edit/{id}")
     public String sendGameEditForm(Model model, @PathVariable("id") int id) {
         Game game = GamelibraryApplication.findGameById(id);
@@ -63,5 +67,15 @@ public class GameController {
         GamelibraryApplication.deleteGame(id);
 
         return "redirect:/games";
+    }
+  
+    @GetMapping("game")
+    public String showGame(Model model, @RequestParam String name){
+        Game game = GamelibraryApplication.findGameByName(name);
+        if (game == null){
+            return "redirect:/games";
+        }
+        model.addAttribute("game", game);
+        return "game/showgame";
     }
 }
