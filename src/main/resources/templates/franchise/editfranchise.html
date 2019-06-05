@@ -31,7 +31,7 @@
                     </select>
                 <td th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</td>
                 </td>
-                <td><input name="oldgenreid" type="text" th:value="*{genreid}"></td>
+                <td><input name="oldgenreid" type="hidden" th:value="*{genreid}"></td>
             </tr>
             <tr>
                 <td>
