@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
 </head>
 <body>
-<div class="flex-container">
-    <b><span th:text="${game.getName()}"> name </span></b>
-    <b><span th:text="${game.getPrice()}"> prijs </span></b>
+<div class="game-showcase">
+    <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
+    <b><span th:text="${'Naam: ' + game.getName()}"> name </span></b>
+    <b><span th:text="${'&euro; ' + game.getPrice()}"> prijs </span></b>
 </div>
 </body>
 </html>

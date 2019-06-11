@@ -12,8 +12,9 @@
 <div class="flex-container">
     <div th:each="game : ${games}">
         <a th:href="@{'game?name=' + ${game.name}}" class="box">
-            <span th:text="${game.name}"> name </span></td>
-            <span th:text="${game.price}"> price </span></td>
+            <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
+            <b><span th:text="${'Naam: ' + game.name}"> name </span></b>
+            <b><span th:text="${'&euro; ' + game.price}"> price </span></b>
         </a>
     </div>
 </div>
