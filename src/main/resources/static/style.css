@@ -1,4 +1,40 @@
-.box {
-    background-color: #bf1014;
-    width:50%;
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.flex-container > div {
+    background-color: #b0aab3;
+    padding: 15px;
+    margin: 15px;
+    width:calc(25% - 4em);
+}
+
+.flex-container > div:hover {
+    border: 1px solid red;
+    padding: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.flex-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .flex-container > div {
+        padding: 5%;
+        margin: 5px;
+        width:calc(40% - 10px);
+    }
+
+    .flex-container > div:hover {
+        padding: calc(5% - 1px);
+    }
 }
