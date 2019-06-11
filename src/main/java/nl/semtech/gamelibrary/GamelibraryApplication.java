@@ -168,11 +168,11 @@ public class GamelibraryApplication {
             if (game.getId() == id) {
               return game;
            }
-     
+
         }
          return null;
     }
-      
+
     public static Game findGameByName(String name) {
         for (Game game : games) {
             if (game.getName().equals(name)) {
