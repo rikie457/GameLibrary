@@ -1,3 +1,13 @@
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.box > b, .game-showcase > b {
+    display:block;
+    margin-top:5px;
+}
+
 .flex-container {
     display: flex;
     flex-direction: row;
@@ -9,16 +19,23 @@
     padding: 15px;
     margin: 15px;
     width:calc(25% - 4em);
+    height:100%;
 }
 
-.flex-container > div:hover {
+.flex-container > div:hover, .game-showcase{
     border: 1px solid red;
     padding: 14px;
 }
 
-a {
-    text-decoration: none;
-    color: #000;
+.game-showcase {
+    width:calc(100% - 30px);
+    height:100%;
+    background-color: #b0aab3;
+}
+
+.game-showcase > img {
+    width:400px;
+    height:400px;
 }
 
 .flex-image {

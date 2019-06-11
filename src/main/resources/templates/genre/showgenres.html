@@ -16,8 +16,8 @@
     <div th:each="genre : ${genres}">
         <a th:href="@{'genre?name=' + ${genre.name}}" class="box">
             <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-            <b><span th:text="${genre.name}"> name </span></b>
-            <b><span th:text="${genre.getFranchisesCount()}"> amount of franchises </span></b>
+            <b><span th:text="${'Naam: ' + genre.name}"> name </span></b>
+            <b><span th:text="${genre.getFranchisesCount() + ' franchise(s)'}">  </span></b>
         </a>
     </div>
 </div>
