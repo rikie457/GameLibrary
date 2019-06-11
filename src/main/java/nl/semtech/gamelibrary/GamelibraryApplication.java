@@ -1,8 +1,7 @@
 package nl.semtech.gamelibrary;
 
-import nl.semtech.gamelibrary.model.Franchise;
-import nl.semtech.gamelibrary.model.Game;
-import nl.semtech.gamelibrary.model.Genre;
+import nl.semtech.gamelibrary.model.*;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,17 +10,18 @@ import java.util.ArrayList;
 @SpringBootApplication
 public class GamelibraryApplication {
 
-    static ArrayList<Genre> genres;
 
-    static ArrayList<Game> games;
-
-    static ArrayList<Franchise> franchises;
+    static ArrayList<User> users;
 
     public static void main(String[] args) {
         SpringApplication.run(GamelibraryApplication.class, args);
-        genres = new ArrayList<>();
-        games = new ArrayList<>();
-        franchises = new ArrayList<>();
+
+        users = new ArrayList<>();
+
+
+        ArrayList<Genre> genres = new ArrayList<>();
+        ArrayList<Game> games = new ArrayList<>();
+        ArrayList<Franchise> franchises = new ArrayList<>();
 
 
         Franchise nonefr = new Franchise();
@@ -75,137 +75,51 @@ public class GamelibraryApplication {
         none.addFranchiseToGenre(nonefr);
         adventure.addFranchiseToGenre(franchise1);
 
+        User user = new User();
+        user.setUsername("test");
+        user.setPassword("123");
+        user.setName("Tycho");
+        user.setGenres(genres);
+        user.setFranchises(franchises);
+        user.setGames(games);
+        users.add(user);
+        user.setId(users.size());
+
 
     }
 
-    public static Genre findGenreById(int id) {
-        for (Genre genre : genres) {
-            if (genre.getId() == id) {
-                return genre;
+    public static boolean checkUsernameAndPassword(String username, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return true;
             }
+
+        }
+        return false;
+    }
+
+    public static User getUserByUsernameAndPassword(String username, String password) {
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+
         }
         return null;
     }
 
-    public static Genre findGenreByName(String name) {
-        for (Genre genre : genres) {
-            if (genre.getName().equals(name)) {
-                return genre;
+    public static User getUserById(int id){
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
+            if (user.getId() == id) {
+                return user;
             }
+
         }
         return null;
     }
 
-
-    public static void updateGenre(int id, Genre newgenre) {
-        Genre genre = findGenreById(id);
-        genre.setName(newgenre.getName());
-    }
-
-    public static void deleteGenre(int id) {
-        Genre genre = findGenreById(id);
-        if (genres.contains(genre)) {
-            genres.remove(genre);
-
-            for (int i = 0; i < franchises.size(); i++) {
-                if (franchises.get(i).getGenreid() == id) {
-                    franchises.get(i).setGenre(genres.get(0));
-                }
-            }
-        }
-
-    }
-
-    public static Franchise findFranchiseById(int id) {
-        for (Franchise franchise : franchises) {
-            if (franchise.getId() == id) {
-                     return franchise;
-            }
-        }
-        return null;
-    }
-
-    public static Franchise findFranchiseByName(String name) {
-        for (Franchise franchise : franchises) {
-            if (franchise.getName().equals(name)) {
-                return franchise;
-            }
-        }
-        return null;
-    }
-
-    public static void updateFranchise(int id, Franchise newfranchise, int oldgenreid) {
-        Franchise franchise = findFranchiseById(id);
-        Genre genre = findGenreById(newfranchise.getGenreid());
-        Genre oldgenre = findGenreById(oldgenreid);
-        if (genre != oldgenre) {
-            oldgenre.deleteFranchiseFromGenre(findFranchiseById(id));
-            franchise.setGenre(genre);
-            genre.addFranchiseToGenre(findFranchiseById(id));
-        }
-        franchise.setName(newfranchise.getName());
-        franchise.setGenreid(newfranchise.getGenreid());
-    }
-
-    public static void deleteFranchise(int id) {
-        Franchise franchise = findFranchiseById(id);
-        if (franchises.contains(franchise)) {
-            franchises.remove(franchise);
-            if (franchise.getGenre() != null) {
-                franchise.getGenre().deleteFranchiseFromGenre(franchise);
-            }
-            for (int i = 0; i < games.size(); i++) {
-                if (games.get(i).getFranchiseId() == id) {
-                    games.get(i).setFranchise(franchises.get(0));
-                }
-            }
-        }
-
-    }
-
-    public static Game findGameById(int id) {
-        for (Game game : games) {
-            if (game.getId() == id) {
-              return game;
-           }
-
-        }
-         return null;
-    }
-
-    public static Game findGameByName(String name) {
-        for (Game game : games) {
-            if (game.getName().equals(name)) {
-                return game;
-            }
-        }
-        return null;
-    }
-
-
-    public static void updateGame(int id, Game newgame, int oldfranchiseid) {
-        Game game = findGameById(id);
-        Franchise franchise = findFranchiseById(newgame.getFranchiseId());
-        Franchise oldfranchise = findFranchiseById(oldfranchiseid);
-        if (franchise != oldfranchise) {
-            oldfranchise.deleteGameFromFranchise(findGameById(id));
-            game.setFranchise(franchise);
-            franchise.addGameToFranchise(findGameById(id));
-        }
-        game.setName(newgame.getName());
-        game.setPrice(newgame.getPrice());
-        game.setFranchiseId(newgame.getFranchiseId());
-    }
-
-
-    public static void deleteGame(int id) {
-        Game game = findGameById(id);
-        if (games.contains(game)) {
-            games.remove(game);
-            if (game.getFranchise() != null) {
-                game.getFranchise().deleteGameFromFranchise(game);
-            }
-        }
-    }
 }
 
