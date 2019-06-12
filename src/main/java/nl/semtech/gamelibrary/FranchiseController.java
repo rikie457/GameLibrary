@@ -19,36 +19,32 @@ public class FranchiseController {
 
     @GetMapping("/franchise/add")
     public String sendFranchiseForm(Franchise franchise, Model model, HttpSession session) {
-        if (session.getAttribute("username") != null) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        model.addAttribute("genres", user.getGenres());
+        return "franchise/newfranchise";
+    }
+
+    @PostMapping("/franchise/add")
+    public String processFranchiseForm(@Valid Franchise franchise, BindingResult bindingResult, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
             User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
             model.addAttribute("genres", user.getGenres());
             return "franchise/newfranchise";
         }
-        return "redirect:/login";
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Genre genre = user.findGenreById(franchise.getGenreid());
+        franchise.setGenre(genre);
+        genre.addFranchiseToGenre(franchise);
+        user.getFranchises().add(franchise);
+        franchise.setId(user.getFranchises().size());
+        return "redirect:/franchises";
     }
-
-//    @PostMapping("/franchise/add")
-//    public String processFranchiseForm(@Valid Franchise franchise, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("genres", GamelibraryApplication.genres);
-//            return "franchise/newfranchise";
-//        }
-//        Genre genre = GamelibraryApplication.findGenreById(franchise.getGenreid());
-//        franchise.setGenre(genre);
-//        genre.addFranchiseToGenre(franchise);
-//        GamelibraryApplication.franchises.add(franchise);
-//        franchise.setId(GamelibraryApplication.franchises.size());
-//        return "redirect:/franchises";
-//    }
 
     @GetMapping("/franchises")
     public String showFranchises(Model model, HttpSession session) {
-        if (session.getAttribute("username") != null) {
-            User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
-            model.addAttribute("franchises", user.getFranchises());
-            return "franchise/showfranchises";
-        }
-        return "redirect:/login";
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        model.addAttribute("franchises", user.getFranchises());
+        return "franchise/showfranchises";
     }
 
 //    @GetMapping("/franchise")

@@ -14,10 +14,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     @GetMapping("/login")
-    public String getLogin(HttpSession session) {
-        if (session.getAttribute("username") != null) {
-            return "redirect:/profile";
-        }
+    public String getLogin() {
         return "user/login";
     }
 
@@ -29,7 +26,6 @@ public class UserController {
         }
         if (GamelibraryApplication.getUserByUsernameAndPassword(username, password) != null) {
             User user = GamelibraryApplication.getUserByUsernameAndPassword(username, password);
-            session.setAttribute("username", user.getUsername());
             session.setAttribute("userid", user.getId());
             return "redirect:/";
         }
@@ -39,7 +35,7 @@ public class UserController {
 
     @GetMapping("/logout")
     public String processLogout(HttpSession session) {
-        if (session.getAttribute("username") != null) {
+        if (session.getAttribute("userid") != null) {
             session.invalidate();
             return "redirect:/";
         }
