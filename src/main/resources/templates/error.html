@@ -2,18 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        table td {
-            vertical-align: top;
-            border: solid 1px #888;
-            padding: 10px;
-        }
-    </style>
+    <title>Oops!</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 <h1>Dit is ongemakkelijk...</h1>
 <p>Er ging wat fout. Zie de onderstaande informatie.</p>
-<table>
+<a th:href="@{/}">Terug</a>
+<table class="errortable">
     <tr>
         <td>Date</td>
         <td th:text="${timestamp}"/>

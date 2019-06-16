@@ -4,50 +4,54 @@
 <!--/*@thymesVar id="game" type="nl.semtech.gamelibrary.model.Game"*/-->
 <!--/*@thymesVar id="activeProfiles" type="java.lang.String"*/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head>
+<head th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-    <title>Edit game</title>
+    <title id="pageTitle">Verander game</title>
 </head>
 <body>
-<section th:if="${game} != null">
-    <form action="*" th:action="@{/game/edit/__${game.id}__}" th:object="${game}" th:method="post">
-        <table>
-            <tr>
-                <td>Id:</td>
-                <td><input type="number" readonly th:field="*{id}"></td>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td><input type="text" th:field="*{name}"/></td>
-                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td><input type="number" th:field="*{price}"/></td>
-                <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</td>
-            </tr>
-            <tr>
-                <td>Franchise</td>
-                <td>
-                    <select th:field="*{franchiseId}">
-                        <option th:each="dropdownitem : ${franchises}" th:text="${dropdownitem.name}"
-                                th:value="${dropdownitem.id}"
-                                th:selected="${dropdownitem.id} == ${game.franchiseId}"></option>
-                    </select>
-                <td th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchiseId}">Content error message</td>
-                </td>
-                <td><input name="oldfranchiseid" type="hidden" th:value="*{franchiseId}"></td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="submit">Submit</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-</section>
-<section th:unless="${game} != null">
-    <h1>No game found</h1>
-</section>
+<nav th:replace="general/fragments :: nav"></nav>
+<main>
+    <section th:if="${game} != null">
+        <form action="*" th:action="@{/game/edit/__${game.id}__}" th:object="${game}" th:method="post">
+            <table>
+                <tr>
+                    <td>Id:</td>
+                    <td><input type="number" readonly th:field="*{id}"></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" th:field="*{name}"/></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="number" th:field="*{price}"/></td>
+                    <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</td>
+                </tr>
+                <tr>
+                    <td>Franchise</td>
+                    <td>
+                        <select th:field="*{franchiseId}">
+                            <option th:each="dropdownitem : ${franchises}" th:text="${dropdownitem.name}"
+                                    th:value="${dropdownitem.id}"
+                                    th:selected="${dropdownitem.id} == ${game.franchiseId}"></option>
+                        </select>
+                    <td th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchiseId}">Content error message
+                    </td>
+                    </td>
+                    <td><input name="oldfranchiseid" type="hidden" th:value="*{franchiseId}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">Submit</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+    <section th:unless="${game} != null">
+        <h1>No game found</h1>
+    </section>
+</main>
 </body>
 </html>

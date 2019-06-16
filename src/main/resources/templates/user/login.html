@@ -2,13 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-    <title>Log in</title>
+   <title id="pageTitle">Log in</title>
 </head>
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
-<header>Login</header>
+<header><h1>Login</h1></header>
 <main>
-    <p th:text="${session}"></p>
     <form th:action="@{/login}" method='post'>
         <table>
             <tr th:if="${error}">

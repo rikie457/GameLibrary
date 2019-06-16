@@ -3,13 +3,18 @@ a {
     color: #000;
 }
 
+header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    height: 140vh;
     background: #eee;
 }
+
 nav {
     display: flex;
     flex-direction: row;
@@ -37,12 +42,15 @@ nav .divider {
 
 nav .item:not(.disabled):hover {
     background-color: #004CB7;
-    cursor:pointer;
+    cursor: pointer;
 }
-
 
 nav:nth-last-child(div) {
     align-self: flex-end;
+}
+
+nav a {
+    color: white;
 }
 
 main {
@@ -54,8 +62,6 @@ main {
     display: block;
     width: 100%;
 }
-
-
 
 
 .box > b, .game-showcase > b {
@@ -78,7 +84,7 @@ main {
 }
 
 .flex-container > div:hover, .game-showcase {
-    border: 1px solid red;
+    border: #8f8992;
     padding: 14px;
 }
 
@@ -109,4 +115,11 @@ main {
     .flex-container > div:hover {
         padding: calc(5% - 1px);
     }
+}
+
+table.errortable  td {
+    color:red;
+    vertical-align: top;
+    border: solid 1px #888;
+    padding: 10px;
 }
