@@ -62,4 +62,10 @@ public class Genre {
                 ", franchises=" + getFranchisesCount() +
                 '}';
     }
+
+
+
+    public String getLink(){
+        return "genre?name=" + name;
+    }
 }

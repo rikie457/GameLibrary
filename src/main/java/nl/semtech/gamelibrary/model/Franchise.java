@@ -82,4 +82,8 @@ public class Franchise {
     public ArrayList<Game> getGames() {
         return this.games;
     }
+
+    public String getLink(){
+        return "franchise?name=" + name;
+    }
 }

@@ -194,4 +194,43 @@ public class User {
             }
         }
     }
+
+    public ArrayList<Object> searchAll(String s) {
+        ArrayList<Object> results = new ArrayList<>();
+        s = s.toLowerCase();
+        results.addAll(findGamesByName(s));
+        results.addAll(findFranchisesByName(s));
+        results.addAll(findGenresByName(s));
+        return results;
+    }
+
+    private ArrayList<Game> findGamesByName(String s) {
+        ArrayList<Game> names = new ArrayList<>();
+        for (Game game : games) {
+            if (game.getName().toLowerCase().contains(s)) {
+                names.add(game);
+            }
+        }
+        return names;
+    }
+
+    private ArrayList<Franchise> findFranchisesByName(String s) {
+        ArrayList<Franchise> names = new ArrayList<>();
+        for (Franchise franchise : franchises) {
+            if (franchise.getName().toLowerCase().contains(s)) {
+                names.add(franchise);
+            }
+        }
+        return names;
+    }
+
+    private ArrayList<Genre> findGenresByName(String s) {
+        ArrayList<Genre> names = new ArrayList<>();
+        for (Genre genre : genres) {
+            if (genre.getName().toLowerCase().contains(s)) {
+                names.add(genre);
+            }
+        }
+        return names;
+    }
 }
