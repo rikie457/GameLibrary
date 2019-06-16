@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="user" type="nl.semtech.gamelibrary.model.User"*/-->
+<!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
 <head th:replace="general/fragments :: head">
     <meta charset="UTF-8">
     <title id="pageTitle">Title</title>
@@ -8,6 +10,29 @@
 <nav th:replace="general/fragments :: nav"></nav>
 <header><h1>Register</h1></header>
 <main>
-
+    <form action="*" th:action="@{/register}" th:object="${user}" method="post">
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" th:field="*{username}"/></td>
+                <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Title error message</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="text" th:field="*{password}"/></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Content error message</td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" th:field="*{name}"/></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Content error message</td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 </main>
 </body>

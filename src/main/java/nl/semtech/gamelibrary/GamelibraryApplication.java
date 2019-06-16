@@ -14,6 +14,9 @@ public class GamelibraryApplication {
 
 
     static ArrayList<User> users;
+    private static Genre defaultge = new Genre();
+    private static Franchise defaultfr = new Franchise();
+
 
     public static void main(String[] args) {
         SpringApplication.run(GamelibraryApplication.class, args);
@@ -26,8 +29,7 @@ public class GamelibraryApplication {
         ArrayList<Franchise> franchises = new ArrayList<>();
 
 
-        Franchise nonefr = new Franchise();
-        nonefr.setName("No franchise");
+        defaultfr.setName("No franchise");
 
         Franchise franchise1 = new Franchise();
         franchise1.setName("Hello kitty");
@@ -40,20 +42,19 @@ public class GamelibraryApplication {
         game1.setName("Call of Duty: Black Ops 1");
         game1.setPrice(59.99);
 
-        Genre none = new Genre();
-        none.setName("No genre");
+        defaultge.setName("No genre");
 
         Genre adventure = new Genre();
         adventure.setName("Adventure");
 
-        franchises.add(nonefr);
-        none.setId(franchises.size());
+        franchises.add(defaultfr);
+        defaultfr.setId(franchises.size());
 
         franchises.add(franchise1);
         franchise1.setId(franchises.size());
 
-        genres.add(none);
-        none.setId(genres.size());
+        genres.add(defaultge);
+        defaultge.setId(genres.size());
 
         genres.add(adventure);
         adventure.setId(genres.size());
@@ -64,17 +65,17 @@ public class GamelibraryApplication {
         games.add(game1);
         game1.setId(games.size());
 
-        game.setFranchise(nonefr);
-        game.setFranchiseId(nonefr.getId());
+        game.setFranchise(defaultfr);
+        game.setFranchiseId(defaultfr.getId());
         game1.setFranchise(franchise1);
         game1.setFranchiseId(franchise1.getId());
-        nonefr.addGameToFranchise(game);
+        defaultfr.addGameToFranchise(game);
         franchise1.addGameToFranchise(game1);
-        nonefr.setGenre(none);
-        nonefr.setGenreid(none.getId());
+        defaultfr.setGenre(defaultge);
+        defaultfr.setGenreid(defaultge.getId());
         franchise1.setGenre(adventure);
         franchise1.setGenreid(adventure.getId());
-        none.addFranchiseToGenre(nonefr);
+        defaultge.addFranchiseToGenre(defaultfr);
         adventure.addFranchiseToGenre(franchise1);
 
         User user = new User();
@@ -121,6 +122,11 @@ public class GamelibraryApplication {
 
         }
         return null;
+    }
+
+    public static void addDefaultToUser(User user) {
+        user.getGenres().add(defaultge);
+        user.getFranchises().add(defaultfr);
     }
 
 }

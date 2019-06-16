@@ -1,4 +1,4 @@
-a {
+a.box {
     text-decoration: none;
     color: #000;
 }
@@ -51,6 +51,7 @@ nav:nth-last-child(div) {
 
 nav a {
     color: white;
+    text-decoration: none;
 }
 
 main {
