@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @GetMapping("/login")
     public String getLogin(HttpSession session, Model model) {
-        System.out.println(session.getAttribute("userid"));
         if(session.getAttribute("userid") != null){
             return "redirect:/";
         }

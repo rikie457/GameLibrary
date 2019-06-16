@@ -25,7 +25,6 @@ public class RequestAuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession(false);
         String url = (request.getRequestURI());
-        System.out.println(url);
         if (ALLOWED_URL_LIST.contains(url)) {
             filterChain.doFilter(request, response);
         } else if (session == null || session.getAttribute("userid") == null) {
