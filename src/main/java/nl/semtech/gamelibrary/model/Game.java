@@ -65,4 +65,8 @@ public class Game {
                 ", franchiseid=" + franchiseid +
                 '}';
     }
+
+    public String getLink(){
+        return "game?name=" + name;
+    }
 }

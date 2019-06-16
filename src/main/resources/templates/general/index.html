@@ -6,8 +6,26 @@
 </head>
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
-<h1>
-    Beter dan Steam by Semih & Tycho
-</h1>
+<main>
+    <header>Index</header>
+    <h1>
+        Beter dan Steam by Semih & Tycho
+    </h1>
+    <form action="*" th:method="post" th:action="@{/}">
+        <input type="text" name="query" th:value="${query}">
+        <button type="submit">Submit</button>
+    </form>
+    <section th:if="${results} != null">
+        <div th:each="result : ${results}">
+            <a th:href="${'/' + result.getLink()}">
+                <b><span th:text="${'Naam: ' + result.getName()}"></span></b>
+            </a>
+        </div>
+    </section>
+    <section th:unless="${results} != null">
+        <h1>No search results</h1>
+    </section>
+</main>
 </body>
+
 </html>
