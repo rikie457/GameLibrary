@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragments :: head">
+    <meta charset="UTF-8">
+    <title id="pageTitle">Beter dan Steam</title>
+</head>
+<body>
+<nav th:replace="general/fragments :: nav"></nav>
+<main>
+    <header>
+        <h1>
+            Beter dan Steam gemaakt door Tycho & Semih
+        </h1>
+    </header>
+    <section>
+        <p>Welkom,
+            <strong th:text="${nameuser}"></strong>
+            Je laatste tijd ingelogd was:
+            <strong th:text="${lastlogin}">Last visit</strong></p>
+
+    </section>
+    <form action="*" th:method="post" th:action="@{/}">
+        <input type="text" name="query" th:value="${query}">
+        <button type="submit">Submit</button>
+    </form>
+    <section th:if="${results} != null">
+        <div th:each="result : ${results}">
+            <a th:href="${'/' + result.getLink()}">
+                <b><span th:text="${'Naam: ' + result.getName()}"></span></b>
+            </a>
+        </div>
+    </section>
+    <section th:unless="${results} != null">
+        <h1>No search results</h1>
+    </section>
+</main>
+</body>
+
+</html>

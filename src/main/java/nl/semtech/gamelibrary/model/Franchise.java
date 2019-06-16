@@ -39,8 +39,8 @@ public class Franchise {
         this.games.add(game);
     }
 
-    public void deleteGameFromFranchise(Game game){
-        if(this.games != null && this.games.contains(game)) {
+    public void deleteGameFromFranchise(Game game) {
+        if (this.games != null) {
             this.games.remove(game);
         }
     }
@@ -52,20 +52,20 @@ public class Franchise {
         return games.size();
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
     public Genre getGenre() {
         return genre;
     }
 
-    public void setGenreid(int genreid) {
-        this.genreid = genreid;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public int getGenreid() {
         return genreid;
+    }
+
+    public void setGenreid(int genreid) {
+        this.genreid = genreid;
     }
 
     @Override
@@ -79,7 +79,11 @@ public class Franchise {
 
     }
 
-    public ArrayList<Game> getGames(){
+    public ArrayList<Game> getGames() {
         return this.games;
+    }
+
+    public String getLink(){
+        return "franchise?name=" + name;
     }
 }

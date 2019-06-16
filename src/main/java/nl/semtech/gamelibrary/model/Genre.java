@@ -38,7 +38,7 @@ public class Genre {
     }
 
     public void deleteFranchiseFromGenre(Franchise franchise) {
-        if (this.franchises != null && this.franchises.contains(franchise)) {
+        if (this.franchises != null) {
             this.franchises.remove(franchise);
         }
     }
@@ -61,5 +61,11 @@ public class Genre {
                 ", id=" + id +
                 ", franchises=" + getFranchisesCount() +
                 '}';
+    }
+
+
+
+    public String getLink(){
+        return "genre?name=" + name;
     }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragments :: head">
+    <meta charset="UTF-8">
+    <title id="pageTitle">Log in</title>
+</head>
+<body>
+<nav th:replace="general/fragments :: nav"></nav>
+
+<main>
+    <header><h1>Login</h1></header>
+    <form th:action="@{/login}" method='post'>
+        <table>
+            <tr th:if="${error}">
+                <td>error:</td>
+                <td><p th:text="${error}"></p></td>
+            </tr>
+            <tr>
+                <td>User:</td>
+                <td><input type='text' name='username' value=''></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type='password' name='password'/></td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <a th:href="@{/register}">Geen account?</a>
+</main>
+</body>

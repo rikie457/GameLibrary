@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="genre" type="nl.semtech.gamelibrary.model.Genre"*/-->
-<!--/*@thymesVar id="activeProfiles" type="java.lang.String"*/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head>
+<head  th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-    <title>Add genre</title>
+   <title id="pageTitle">Voeg genre toe</title>
 </head>
 <body>
+<nav th:replace="general/fragments :: nav"></nav>
+<main>
 <form action="*" th:action="@{/genre/add}" th:object="${genre}" method="post">
     <table>
         <tr>
@@ -24,5 +25,6 @@
         </tr>
     </table>
 </form>
+</main>
 </body>
 </html>

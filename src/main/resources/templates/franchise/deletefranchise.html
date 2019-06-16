@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-    <title>Cant delete franchise</title>
+    <title id="pageTitle">Kan franchise niet verwijderen</title>
 </head>
 <body>
-<h1>Sorry you cant delete default: No Franchise</h1>
+<nav th:replace="general/fragments :: nav"></nav>
+<header> <h1>Je kan niet de standaard verwijderen: No Franchise</h1></header>
+<main>
+
+</main>
 </body>
 </html>

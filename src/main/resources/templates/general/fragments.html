@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title th:include=":: #pageTitle">Layout Generic Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+<nav th:fragment="nav">
+    <div class="item disabled">BeterDanSteam</div>
+    <div class="item" th:if="${authenticated != false}"><a th:href="@{/}">Home</a></div>
+    <div class="item" th:if="${authenticated != false}"><a th:href="@{/games}">Games</a></div>
+    <div class="item" th:if="${authenticated != false}"><a th:href="@{/franchises}">Franchises</a></div>
+    <div class="item" th:if="${authenticated != false}"><a th:href="@{/genres}">Genres</a></div>
+    <div class="item" th:if="${authenticated != false}"><a th:href="@{/logout}">Uitloggen</a></div>
+</nav>
+
+</body>
+</html>

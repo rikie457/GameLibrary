@@ -3,12 +3,13 @@
 <!--/@thymesVar id="franchise" type="nl.semtech.gamelibrary.model.Franchise"/-->
 <!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head>
+<head  th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-    <title>All games</title>
-    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+    <title id="pageTitle" th:text="${franchise.getName()}"></title>
 </head>
 <body>
+<nav th:replace="general/fragments :: nav"></nav>
+<main>
 <div class="flex-container">
     <div class="box" th:each="game : ${franchise.getGames()}">
         <a th:href="@{'game?name=' + ${game.name}}" class="box">
@@ -18,5 +19,6 @@
         </a>
     </div>
 </div>
+</main>
 </body>
 </html>

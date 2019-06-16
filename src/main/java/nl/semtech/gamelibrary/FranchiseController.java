@@ -3,48 +3,54 @@ package nl.semtech.gamelibrary;
 
 import nl.semtech.gamelibrary.model.Franchise;
 import nl.semtech.gamelibrary.model.Genre;
+import nl.semtech.gamelibrary.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import org.springframework.ui.Model;
 
 @Controller
 public class FranchiseController {
 
 
     @GetMapping("/franchise/add")
-    public String sendFranchiseForm(Franchise franchise, Model model) {
-        model.addAttribute("genres", GamelibraryApplication.genres);
+    public String sendFranchiseForm(Franchise franchise, Model model, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        model.addAttribute("genres", user.getGenres());
         return "franchise/newfranchise";
     }
 
     @PostMapping("/franchise/add")
-    public String processFranchiseForm(@Valid Franchise franchise, BindingResult bindingResult, Model model) {
+    public String processFranchiseForm(@Valid Franchise franchise, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("genres", GamelibraryApplication.genres);
+            User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+            model.addAttribute("genres", user.getGenres());
             return "franchise/newfranchise";
         }
-        Genre genre = GamelibraryApplication.findGenreById(franchise.getGenreid());
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Genre genre = user.findGenreById(franchise.getGenreid());
         franchise.setGenre(genre);
         genre.addFranchiseToGenre(franchise);
-        GamelibraryApplication.franchises.add(franchise);
-        franchise.setId(GamelibraryApplication.franchises.size());
+        user.getFranchises().add(franchise);
+        franchise.setId(user.getFranchises().size());
         return "redirect:/franchises";
     }
 
     @GetMapping("/franchises")
-    public String showFranchises(Model model){
-        model.addAttribute("franchises", GamelibraryApplication.franchises);
+    public String showFranchises(Model model, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        model.addAttribute("franchises", user.getFranchises());
         return "franchise/showfranchises";
     }
 
     @GetMapping("/franchise")
-    public String showFranchise(Model model, @RequestParam String name){
-        Franchise franchise = GamelibraryApplication.findFranchiseByName(name);
-        if (franchise == null){
+    public String showFranchise(Model model, @RequestParam String name, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Franchise franchise = user.findFranchiseByName(name);
+        if (franchise == null) {
             return "redirect:/franchises";
         }
         model.addAttribute("franchise", franchise);
@@ -53,29 +59,33 @@ public class FranchiseController {
     }
 
     @GetMapping("/franchise/edit/{id}")
-    public String sendFranchiseEditForm(Model model, @PathVariable("id") int id) {
-        Franchise franchise = GamelibraryApplication.findFranchiseById(id);
+    public String sendFranchiseEditForm(Model model, @PathVariable("id") int id, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Franchise franchise = user.findFranchiseById(id);
         model.addAttribute("franchise", franchise);
-        model.addAttribute("genres", GamelibraryApplication.genres);
+        model.addAttribute("genres", user.getGenres());
         return "franchise/editfranchise";
     }
 
     @PostMapping("/franchise/edit/{id}")
-    public String processFranchiseEditForm(@PathVariable("id") int id, @Valid @ModelAttribute Franchise franchise, BindingResult bindingResult, @RequestParam("oldgenreid") int oldgenreid, Model model) {
+    public String processFranchiseEditForm(@PathVariable("id") int id, @Valid @ModelAttribute Franchise franchise, BindingResult bindingResult, @RequestParam("oldgenreid") int oldgenreid, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("genres", GamelibraryApplication.genres);
+            User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+            model.addAttribute("genres", user.getGenres());
             return "franchise/editfranchise";
         }
-        GamelibraryApplication.updateFranchise(id, franchise, oldgenreid);
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        user.updateFranchise(id, franchise, oldgenreid);
 
         return "redirect:/franchises";
     }
 
     @GetMapping("franchise/delete/{id}")
-    public String deleteFranchise(@PathVariable("id") int id) {
-        if(id != 1) {
-            GamelibraryApplication.deleteFranchise(id);
-        }else{
+    public String deleteFranchise(@PathVariable("id") int id, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        if (id != 1) {
+            user.deleteFranchise(id);
+        } else {
             return "franchise/deletefranchise";
         }
 

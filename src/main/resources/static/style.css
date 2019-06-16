@@ -1,11 +1,68 @@
-a {
+a.box {
     text-decoration: none;
     color: #000;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #eee;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #47A8E0;
+    min-height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+nav .item {
+    padding: 1rem .4rem;
+    text-align: center;
+    font-family: sans-serif;
+    color: white;
+    flex-grow: 1;
+}
+
+nav .divider {
+    height: 2.5rem;
+    margin: auto 0;
+    border: solid 1px #32512F;
+}
+
+nav .item:not(.disabled):hover {
+    background-color: #004CB7;
+    cursor: pointer;
+}
+
+nav:nth-last-child(div) {
+    align-self: flex-end;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    min-height: 10rem;
+    padding: 1rem;
+}
+
+.item.open {
+    display: block;
+    width: 100%;
+}
+
+
 .box > b, .game-showcase > b {
-    display:block;
-    margin-top:5px;
+    display: block;
+    margin-top: 5px;
 }
 
 .flex-container {
@@ -18,24 +75,24 @@ a {
     background-color: #b0aab3;
     padding: 15px;
     margin: 15px;
-    width:calc(25% - 4em);
-    height:100%;
+    width: calc(25% - 4em);
+    height: 100%;
 }
 
-.flex-container > div:hover, .game-showcase{
-    border: 1px solid red;
+.flex-container > div:hover, .game-showcase {
+    border: #8f8992;
     padding: 14px;
 }
 
 .game-showcase {
-    width:calc(100% - 30px);
-    height:100%;
+    width: calc(100% - 30px);
+    height: 100%;
     background-color: #b0aab3;
 }
 
 .game-showcase > img {
-    width:400px;
-    height:400px;
+    width: 400px;
+    height: 400px;
 }
 
 .flex-image {
@@ -48,10 +105,17 @@ a {
     .flex-container > div {
         padding: 5%;
         margin: 5px;
-        width:calc(40% - 10px);
+        width: calc(40% - 10px);
     }
 
     .flex-container > div:hover {
         padding: calc(5% - 1px);
     }
+}
+
+table.errortable  td {
+    color:red;
+    vertical-align: top;
+    border: solid 1px #888;
+    padding: 10px;
 }
