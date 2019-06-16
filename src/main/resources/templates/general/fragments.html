@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <!-- test -->
+    <title th:text="${pagetitle}">Title</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+</head>
+<body>
+<nav th:fragment="nav">
+    <div class="item disabled">BeterDanSteam</div>
+    <div class="item">Home</div>
+    <div class="item">Games</div>
+    <div class="item">Franchises</div>
+    <div class="item">Genres</div>
+    <div class="item">Uitloggen</div>
+</nav>
+
+</body>
+</html>

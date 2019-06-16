@@ -38,7 +38,7 @@ public class Genre {
     }
 
     public void deleteFranchiseFromGenre(Franchise franchise) {
-        if (this.franchises != null && this.franchises.contains(franchise)) {
+        if (this.franchises != null) {
             this.franchises.remove(franchise);
         }
     }

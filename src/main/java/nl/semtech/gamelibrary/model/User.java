@@ -25,18 +25,6 @@ public class User {
         this.name = name;
     }
 
-    public void setFranchises(ArrayList<Franchise> franchises) {
-        this.franchises = franchises;
-    }
-
-    public void setGames(ArrayList<Game> games) {
-        this.games = games;
-    }
-
-    public void setGenres(ArrayList<Genre> genres) {
-        this.genres = genres;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -57,12 +45,24 @@ public class User {
         return franchises;
     }
 
+    public void setFranchises(ArrayList<Franchise> franchises) {
+        this.franchises = franchises;
+    }
+
     public ArrayList<Game> getGames() {
         return games;
     }
 
+    public void setGames(ArrayList<Game> games) {
+        this.games = games;
+    }
+
     public ArrayList<Genre> getGenres() {
         return genres;
+    }
+
+    public void setGenres(ArrayList<Genre> genres) {
+        this.genres = genres;
     }
 
     public Genre findGenreById(int id) {

@@ -14,11 +14,10 @@ import java.util.List;
 public class RequestAuthenticationFilter implements Filter {
 
     //These are all the allowed URLS
-    protected static final List<String> ALLOWED_URL_LIST = Arrays.asList("/login", "/error", "/register");
+    protected static final List<String> ALLOWED_URL_LIST = Arrays.asList("/login", "/error", "/register", "/style.css");
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
@@ -26,10 +25,10 @@ public class RequestAuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession(false);
         String url = (request.getRequestURI());
-
+        System.out.println(url);
         if (ALLOWED_URL_LIST.contains(url)) {
             filterChain.doFilter(request, response);
-        } else if (session.getAttribute("userid") == null) {
+        } else if (session == null || session.getAttribute("userid") == null) {
             ((HttpServletResponse) response).sendRedirect("/login");
         } else {
             filterChain.doFilter(request, response);

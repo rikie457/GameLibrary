@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class GameLibraryController {
     @RequestMapping("/")
-    public String index(){
-        return "index";
+    public String index() {
+        return "general/index";
     }
 }

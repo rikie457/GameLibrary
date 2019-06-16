@@ -3,8 +3,6 @@ package nl.semtech.gamelibrary;
 import nl.semtech.gamelibrary.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +12,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
     @GetMapping("/login")
-    public String getLogin() {
+    public String getLogin(HttpSession session, Model model) {
+        System.out.println(session.getAttribute("userid"));
+        model.addAttribute("session", session.getAttribute("userid"));
         return "user/login";
     }
 
@@ -35,11 +35,8 @@ public class UserController {
 
     @GetMapping("/logout")
     public String processLogout(HttpSession session) {
-        if (session.getAttribute("userid") != null) {
-            session.invalidate();
-            return "redirect:/";
-        }
-        return "user/login";
+        session.invalidate();
+        return "redirect:/login";
     }
 }
 

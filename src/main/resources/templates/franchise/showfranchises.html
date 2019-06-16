@@ -3,12 +3,12 @@
 <!--/@thymesVar id="franchises" type="nl.semtech.gamelibrary.model.Franchise"/-->
 <!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head>
+<head  th:replace="general/fragments :: head">
     <meta charset="UTF-8">
     <title>All franchises</title>
-    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
 </head>
 <body>
+<nav th:replace="general/fragments :: nav"></nav>
 <div th:if="${franchises.empty}">
     <a> No franchises Available </a>
 </div>

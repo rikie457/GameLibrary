@@ -1,7 +1,9 @@
 package nl.semtech.gamelibrary;
 
-import nl.semtech.gamelibrary.model.*;
-
+import nl.semtech.gamelibrary.model.Franchise;
+import nl.semtech.gamelibrary.model.Game;
+import nl.semtech.gamelibrary.model.Genre;
+import nl.semtech.gamelibrary.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -110,7 +112,7 @@ public class GamelibraryApplication {
         return null;
     }
 
-    public static User getUserById(int id){
+    public static User getUserById(int id) {
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
             if (user.getId() == id) {

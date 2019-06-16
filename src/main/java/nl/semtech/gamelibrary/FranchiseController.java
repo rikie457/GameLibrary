@@ -5,13 +5,12 @@ import nl.semtech.gamelibrary.model.Franchise;
 import nl.semtech.gamelibrary.model.Genre;
 import nl.semtech.gamelibrary.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import org.springframework.ui.Model;
 
 @Controller
 public class FranchiseController {
@@ -47,47 +46,52 @@ public class FranchiseController {
         return "franchise/showfranchises";
     }
 
-//    @GetMapping("/franchise")
-//    public String showFranchise(Model model, @RequestParam String name){
-//        Franchise franchise = GamelibraryApplication.findFranchiseByName(name);
-//        if (franchise == null){
-//            return "redirect:/franchises";
-//        }
-//        model.addAttribute("franchise", franchise);
-//        return "franchise/showfranchise";
-//
-//    }
-//
-//    @GetMapping("/franchise/edit/{id}")
-//    public String sendFranchiseEditForm(Model model, @PathVariable("id") int id) {
-//        Franchise franchise = GamelibraryApplication.findFranchiseById(id);
-//        model.addAttribute("franchise", franchise);
-//        model.addAttribute("genres", GamelibraryApplication.genres);
-//        return "franchise/editfranchise";
-//    }
-//
-//    @PostMapping("/franchise/edit/{id}")
-//    public String processFranchiseEditForm(@PathVariable("id") int id, @Valid @ModelAttribute Franchise franchise, BindingResult bindingResult, @RequestParam("oldgenreid") int oldgenreid, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("genres", GamelibraryApplication.genres);
-//            return "franchise/editfranchise";
-//        }
-//        GamelibraryApplication.updateFranchise(id, franchise, oldgenreid);
-//
-//        return "redirect:/franchises";
-//    }
-//
-//    @GetMapping("franchise/delete/{id}")
-//    public String deleteFranchise(@PathVariable("id") int id) {
-//        if(id != 1) {
-//            GamelibraryApplication.deleteFranchise(id);
-//        }else{
-//            return "franchise/deletefranchise";
-//        }
-//
-//
-//        return "redirect:/franchises";
-//    }
-//
+    @GetMapping("/franchise")
+    public String showFranchise(Model model, @RequestParam String name, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Franchise franchise = user.findFranchiseByName(name);
+        if (franchise == null) {
+            return "redirect:/franchises";
+        }
+        model.addAttribute("franchise", franchise);
+        return "franchise/showfranchise";
+
+    }
+
+    @GetMapping("/franchise/edit/{id}")
+    public String sendFranchiseEditForm(Model model, @PathVariable("id") int id, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Franchise franchise = user.findFranchiseById(id);
+        model.addAttribute("franchise", franchise);
+        model.addAttribute("genres", user.getGenres());
+        return "franchise/editfranchise";
+    }
+
+    @PostMapping("/franchise/edit/{id}")
+    public String processFranchiseEditForm(@PathVariable("id") int id, @Valid @ModelAttribute Franchise franchise, BindingResult bindingResult, @RequestParam("oldgenreid") int oldgenreid, Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+            model.addAttribute("genres", user.getGenres());
+            return "franchise/editfranchise";
+        }
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        user.updateFranchise(id, franchise, oldgenreid);
+
+        return "redirect:/franchises";
+    }
+
+    @GetMapping("franchise/delete/{id}")
+    public String deleteFranchise(@PathVariable("id") int id, HttpSession session) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        if (id != 1) {
+            user.deleteFranchise(id);
+        } else {
+            return "franchise/deletefranchise";
+        }
+
+
+        return "redirect:/franchises";
+    }
+
 
 }
