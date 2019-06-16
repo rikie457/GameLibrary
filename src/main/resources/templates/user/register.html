@@ -8,8 +8,9 @@
 </head>
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
-<header><h1>Register</h1></header>
+
 <main>
+    <header><h1>Register</h1></header>
     <form action="*" th:action="@{/register}" th:object="${user}" method="post">
         <table>
             <tr>

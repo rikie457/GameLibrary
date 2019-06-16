@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 public class UserController {
@@ -23,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String processLogin(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession session) {
+    public String processLogin(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession session, HttpServletResponse response) {
         if (!GamelibraryApplication.checkUsernameAndPassword(username, password)) {
             model.addAttribute("error", "Username and/or Password are incorrect");
             model.addAttribute("authenticated", false);
@@ -67,8 +72,29 @@ public class UserController {
 
 
     @GetMapping("/logout")
-    public String processLogout(HttpSession session) {
+    public String processLogout(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         session.invalidate();
+        Cookie[] cookies = request.getCookies();
+        Cookie oldcookie = null, cookie = null;
+        for (int i = 0; i < cookies.length; i++) {
+            cookie = cookies[i];
+            if (cookie.getName().equals("lastlogin")) {
+                System.out.println("OLD FOUND!");
+                System.out.println(cookie.getName() + " " + cookie.getValue());
+                oldcookie = cookie;
+            }
+        }
+        if (oldcookie == null) {
+            System.out.println("NEW!");
+            cookie = new Cookie("lastlogin", new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Date()));
+            cookie.setMaxAge(60 * 60 * 24 * 365);
+            response.addCookie(cookie);
+        } else {
+            System.out.println("REPLACE!");
+            oldcookie.setValue(new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Date()));
+            response.addCookie(oldcookie);
+        }
+
         return "redirect:/login";
     }
 }
