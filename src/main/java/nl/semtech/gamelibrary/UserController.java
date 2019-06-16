@@ -15,8 +15,10 @@ import java.util.ArrayList;
 public class UserController {
     @GetMapping("/login")
     public String getLogin(HttpSession session, Model model) {
-        System.out.println(session.getAttribute("userid"));
-        model.addAttribute("session", session.getAttribute("userid"));
+        if(session.getAttribute("userid") != null){
+            return "redirect:/";
+        }
+        model.addAttribute("authenticated", false);
         return "user/login";
     }
 
@@ -24,6 +26,7 @@ public class UserController {
     public String processLogin(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession session) {
         if (!GamelibraryApplication.checkUsernameAndPassword(username, password)) {
             model.addAttribute("error", "Username and/or Password are incorrect");
+            model.addAttribute("authenticated", false);
             return "user/login";
         }
         if (GamelibraryApplication.getUserByUsernameAndPassword(username, password) != null) {

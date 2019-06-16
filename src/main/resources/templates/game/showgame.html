@@ -3,16 +3,18 @@
 <!--/@thymesVar id="game" type="nl.semtech.gamelibrary.model.Game"/-->
 <!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head>
+<head  th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-    <title th:text="${game.getName()}"></title>
-    <link rel="stylesheet" href="../../static/style.css" th:href="@{/style.css}">
+    <title id="pageTitle" th:text="${game.getName()}"></title>
 </head>
 <body>
+<nav th:replace="general/fragments :: nav"></nav>
+<main>
 <div class="game-showcase">
     <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
     <b><span th:text="${'Naam: ' + game.getName()}"> name </span></b>
     <b><span th:text="${'&euro; ' + game.getPrice()}"> prijs </span></b>
 </div>
+</main>
 </body>
 </html>
