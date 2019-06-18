@@ -13,29 +13,28 @@
     <section class="form">
         <header><h1>Register</h1></header>
         <form action="*" method="post" th:action="@{/register}" th:object="${user}">
-            <table>
-                <div class="row">
-                    <label class="col" for="username">Username:</label>
-                    <input class="col" id="username" th:field="*{username}" type="text"/>
-                    <strong th:errors="*{username}" th:if="${#fields.hasErrors('username')}">Title error
-                        message</strong>
-                </div>
-                <div class="row">
-                    <label class="col">Password:</label>
-                    <input class="col" id="password" th:field="*{password}" type="text"/>
-                    <strong th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Content error
-                        message</strong>
-                </div>
-                <div class="row">
-                    <label class="col" for="name">Name:</label>
-                    <input class="col" id="name" th:field="*{name}" type="text"/>
-                    <strong th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Content error message</strong>
-                </div>
-                <div class="row">
-                    <input name="submit" type="submit" value="submit"/>
-                </div>
-            </table>
+            <div class="row">
+                <label class="col" for="username">Username:</label>
+                <input class="col" id="username" th:field="*{username}" type="text"/>
+                <strong th:errors="*{username}" th:if="${#fields.hasErrors('username')}">Title error
+                    message</strong>
+            </div>
+            <div class="row">
+                <label class="col">Password:</label>
+                <input class="col" id="password" th:field="*{password}" type="text"/>
+                <strong th:errors="*{password}" th:if="${#fields.hasErrors('password')}">Content error
+                    message</strong>
+            </div>
+            <div class="row">
+                <label class="col" for="name">Name:</label>
+                <input class="col" id="name" th:field="*{name}" type="text"/>
+                <strong th:errors="*{name}" th:if="${#fields.hasErrors('name')}">Content error message</strong>
+            </div>
+            <div class="row">
+                <input name="submit" type="submit" value="submit"/>
+            </div>
         </form>
     </section>
 </main>
 </body>
+</html>
