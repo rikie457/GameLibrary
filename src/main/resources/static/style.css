@@ -1,11 +1,6 @@
-a {
+a.box {
     text-decoration: none;
     color: #000;
-}
-
-header {
-    padding-left: 1rem;
-    padding-right: 1rem;
 }
 
 body {
@@ -51,6 +46,7 @@ nav:nth-last-child(div) {
 
 nav a {
     color: white;
+    text-decoration: none;
 }
 
 main {

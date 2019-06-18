@@ -1,12 +1,22 @@
 package nl.semtech.gamelibrary.model;
 
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 public class User {
-    private ArrayList<Franchise> franchises;
-    private ArrayList<Genre> genres;
-    private ArrayList<Game> games;
-    private String username, password, name;
+    private ArrayList<Franchise> franchises = new ArrayList<>();
+    private ArrayList<Genre> genres = new ArrayList<>();
+    private ArrayList<Game> games = new ArrayList<>();
+
+    @Size(min = 2, max = 20)
+    private String username;
+
+    @Size(min = 2, max = 20)
+    private String password;
+
+    @Size(min = 2, max = 20)
+    private String name;
+
     private int id;
 
     public int getId() {
@@ -232,5 +242,18 @@ public class User {
             }
         }
         return names;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "franchises=" + franchises +
+                ", genres=" + genres +
+                ", games=" + games +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
