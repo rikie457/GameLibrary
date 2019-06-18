@@ -8,7 +8,7 @@
 <nav th:replace="general/fragments :: nav"></nav>
 
 <main>
-    <section class="login-form">
+    <section class="form">
         <header><h1>Login</h1></header>
         <form th:action="@{/login}" method='post'>
             <div class="row">
@@ -22,8 +22,7 @@
             <div class="row">
                 <input name="submit" type="submit" value="submit"/>
             </div>
-
-            <strong th:text="${error}"></strong>
+            <strong th:text="${error}"></strong><br>
             <a th:href="@{/register}">Geen account?</a>
         </form>
     </section>

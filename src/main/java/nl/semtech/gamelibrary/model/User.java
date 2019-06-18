@@ -101,16 +101,15 @@ public class User {
 
     public void deleteGenre(int id) {
         Genre genre = findGenreById(id);
-        if (genres.contains(genre)) {
-            genres.remove(genre);
-
-            for (int i = 0; i < franchises.size(); i++) {
-                if (franchises.get(i).getGenreid() == id) {
-                    franchises.get(i).setGenre(genres.get(0));
-                }
+        for (Franchise franchise : franchises) {
+            if (franchise.getGenre() == genre) {
+                Genre replacegenre = findGenreById(1);
+                franchise.setGenre(replacegenre);
+                franchise.setGenreid(replacegenre.getId());
+                replacegenre.getFranchises().add(franchise);
             }
         }
-
+        genres.remove(genre);
     }
 
     public Franchise findFranchiseById(int id) {
@@ -146,19 +145,21 @@ public class User {
 
     public void deleteFranchise(int id) {
         Franchise franchise = findFranchiseById(id);
-        if (franchises.contains(franchise)) {
-            franchises.remove(franchise);
-            if (franchise.getGenre() != null) {
-                franchise.getGenre().deleteFranchiseFromGenre(franchise);
-            }
-            for (int i = 0; i < games.size(); i++) {
-                if (games.get(i).getFranchiseId() == id) {
-                    games.get(i).setFranchise(franchises.get(0));
+        for (Game game : games) {
+            if (game.getFranchise() == franchise) {
+                Franchise replacefranchise = findFranchiseById(1);
+                game.setFranchise(replacefranchise);
+                game.setFranchiseId(replacefranchise.getId());
+                replacefranchise.getGames().add(game);
+                if (franchise.getGenre() != null) {
+                    franchise.getGenre().deleteFranchiseFromGenre(franchise);
                 }
+
             }
         }
-
+        franchises.remove(franchise);
     }
+
 
     public Game findGameById(int id) {
         for (Game game : games) {
@@ -211,7 +212,10 @@ public class User {
         results.addAll(findGamesByName(s));
         results.addAll(findFranchisesByName(s));
         results.addAll(findGenresByName(s));
-        return results;
+        if (results.size() != 0) {
+            return results;
+        }
+        return null;
     }
 
     private ArrayList<Game> findGamesByName(String s) {

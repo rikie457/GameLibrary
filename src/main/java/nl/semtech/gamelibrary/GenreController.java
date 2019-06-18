@@ -1,6 +1,5 @@
 package nl.semtech.gamelibrary;
 
-import nl.semtech.gamelibrary.model.Game;
 import nl.semtech.gamelibrary.model.Genre;
 import nl.semtech.gamelibrary.model.User;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class GenreController {
     @GetMapping("/genre/edit/{id}")
     public String sendGenreEditForm(Model model, @PathVariable("id") int id, HttpSession session) {
         User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
-        Game genre = user.findGameById(id);
+        Genre genre = user.findGenreById(id);
         model.addAttribute("genre", genre);
         return "genre/editgenre";
     }

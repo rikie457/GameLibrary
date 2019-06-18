@@ -22,7 +22,7 @@
     </section>
     <form action="*" th:method="post" th:action="@{/}">
         <input type="text" name="query" th:value="${query}">
-        <button type="submit">Submit</button>
+        <input name="submit" type="submit" value="submit"/>
     </form>
     <section th:if="${results} != null">
         <div th:each="result : ${results}">
@@ -32,9 +32,8 @@
         </div>
     </section>
     <section th:unless="${results} != null">
-        <h1>No search results</h1>
+        <h1>Geen zoek resultaten</h1>
     </section>
 </main>
 </body>
-
 </html>

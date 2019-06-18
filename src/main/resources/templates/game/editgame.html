@@ -14,20 +14,36 @@
     <section th:if="${game} != null">
         <div class="add-page">
             <form action="*" th:action="@{/game/edit/__${game.id}__}" th:object="${game}" th:method="post">
-                <input placeholder="id" type="number" readonly th:field="*{id}">
-                <input placeholder="Naam" type="text" th:field="*{name}"/>
+                <div class="row">
+                    <label class="col" for="id">ID</label>
+                    <input class="col" id="id" placeholder="id" readonly th:field="*{id}" type="number">
+                </div>
+                <div class="row">
+                    <label class="col" for="name">Naam</label>
+                    <input class="col" id="name" placeholder="Naam" th:field="*{name}" type="text"/>
+                </div>
                 <strong th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</strong>
-                <input placeholder="Prijs" type="number" th:field="*{price}"/>
+                <div class="row">
+                    <label class="col" for="price">Naam</label>
+                    <input class="col" id="price" placeholder="Prijs" th:field="*{price}" type="number"/>
+                </div>
                 <strong th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</strong>
-                Franchise
-                <select th:field="*{franchiseId}">
-                    <option th:each="dropdownitem : ${franchises}" th:text="${dropdownitem.name}"
-                            th:value="${dropdownitem.id}"
-                            th:selected="${dropdownitem.id} == ${game.franchiseId}"></option>
-                </select>
-                <strong th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchiseId}">Content error message</strong>
-                <input placeholder="Oude franchise id" name="oldfranchiseid" type="hidden" th:value="*{franchiseId}">
-                <button type="submit">Submit</button>
+                <div class="row">
+                    <label class="col" for="franchise">Franchise</label>
+                    <select class="col" id="franchise" th:field="*{franchiseId}">
+                        <option th:each="dropdownitem : ${franchises}"
+                                th:selected="${dropdownitem.id} == ${game.franchiseId}"
+                                th:text="${dropdownitem.name}"
+                                th:value="${dropdownitem.id}"></option>
+                    </select>
+                </div>
+                <strong th:errors="*{franchiseId}" th:if="${#fields.hasErrors('franchiseId')}">Content error
+                    message</strong>
+                <input name="oldfranchiseid" placeholder="Oude franchise id" th:value="*{franchiseId}"
+                       type="hidden">
+                <div class="row">
+                    <input name="submit" type="submit" value="submit"/>
+                </div>
             </form>
         </div>
     </section>

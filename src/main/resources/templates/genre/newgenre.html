@@ -9,13 +9,18 @@
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
-    <div class="add-page">
+    <section class="add-page">
         <form action="*" th:action="@{/genre/add}" th:object="${genre}" method="post">
-            <input placeholder="Genre titel" type="text" id="name" th:field="*{name}"/>
+            <div class="row">
+                <label for="name">Naam</label>
+                <input id="name" placeholder="Titel" th:field="*{name}" type="text"/>
+            </div>
             <strong th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</strong>
-            <button type="submit">Submit</button>
+            <div class="row">
+                <input name="submit" type="submit" value="submit"/>
+            </div>
         </form>
-    </div>
+    </section>
 </main>
 </body>
 </html>

@@ -11,23 +11,34 @@
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
     <section th:if="${franchise} != null">
-        <div class="add-page">
+        <section class="add-page">
             <form action="*" th:action="@{/franchise/edit/__${franchise.id}__}" th:object="${franchise}"
                   th:method="post">
-                <input placeholder="id" type="number" readonly th:field="*{id}">
-                <input placeholder="Naam" type="text" th:field="*{name}"/>
+                <div class="row">
+                    <label for="id">ID</label>
+                    <input id="id" placeholder="id" readonly th:field="*{id}" type="number">
+                </div>
+                <div class="row">
+                    <label for="name">Naam</label>
+                    <input id="name" placeholder="Naam" th:field="*{name}" type="text"/>
+                </div>
                 <strong th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</strong>
-                Genre
-                <select th:field="*{genreid}">
-                    <option th:each="dropdownitem : ${genres}" th:text="${dropdownitem.name}"
-                            th:value="${dropdownitem.id}"
-                            th:selected="${dropdownitem.id} == ${franchise.genreid}"></option>
-                </select>
+                <div class="row">
+                    <label for="genres">Genre</label>
+                    <select id="genres" th:field="*{genreid}">
+                        <option th:each="dropdownitem : ${genres}"
+                                th:selected="${dropdownitem.id} == ${franchise.genreid}"
+                                th:text="${dropdownitem.name}"
+                                th:value="${dropdownitem.id}"></option>
+                    </select>
+                </div>
                 <strong th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</strong>
                 <input placeholder="Oude genre id" name="oldgenreid" type="hidden" th:value="*{genreid}">
-                <button type="submit">Submit</button>
+                <div class="row">
+                    <input name="submit" type="submit" value="submit"/>
+                </div>
             </form>
-        </div>
+        </section>
     </section>
     <section th:unless="${franchise} != null">
         <h1>No franchise found</h1>

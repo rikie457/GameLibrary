@@ -7,21 +7,20 @@
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
-    <div th:if="${games.empty}">
-        <a> No Games Available</a>
-    </div>
     <div>
         <a th:href="@{'game/add'}" class="add-box">
             Maak game aan
         </a>
     </div>
+    <div th:if="${games.empty}">
+        <p> Geen games beschikbaar</p>
+    </div>
     <div class="flex-container">
         <div th:each="game : ${games}">
-            <a th:href="@{'game?name=' + ${game.name}}" class="box">
-                <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-                <strong><span th:text="${'Naam: ' + game.name}"> name </span></strong>
-                <strong><span th:text="${'&euro; ' + game.price}"> price </span></strong>
-            </a>
+            <img alt="placeholder" class="flex-image" th:src="@{/square-placeholder.jpg}">
+            <strong th:text="${'Naam: ' + game.name}"> name </strong><br>
+            <strong th:text="${'&euro; ' + game.price}"> price </strong><br>
+            <a class="box" th:href="@{'game?name=' + ${game.name}}">Bekijk game</a>
         </div>
     </div>
 </main>

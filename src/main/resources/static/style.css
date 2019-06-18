@@ -1,13 +1,12 @@
-a.box {
-    text-decoration: none;
-    color: #000;
-}
-
 body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     background: #eee;
+}
+
+section {
+    margin: 4px;
 }
 
 nav {
@@ -58,7 +57,6 @@ main {
     display: block;
     width: 100%;
 }
-
 
 .box > strong, .game-showcase > b {
     display: block;
@@ -133,13 +131,14 @@ main {
     padding: 15px;
 }
 
-.login-form {
+.form {
     position: absolute;
     background: #b0aab3;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 15px;
+    box-sizing: border-box;
 }
 
 @media only screen and (max-width: 768px) {
@@ -160,7 +159,7 @@ main {
 }
 
 
-input, select, textarea {
+.row > input, select, textarea {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -168,18 +167,13 @@ input, select, textarea {
 }
 
 label {
-    padding: 12px 12px 12px 0;
     display: inline-block;
-}
-
-.login-form {
-    box-sizing: border-box;
 }
 
 input[type=submit] {
     background-color: #47A8E0;
     color: white;
-
+    margin-right: 4px;
     padding: 4px 5px;
     border: none;
     border-radius: 4px;

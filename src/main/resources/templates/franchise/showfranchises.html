@@ -19,12 +19,13 @@
         </a>
     </div>
     <div class="flex-container">
-        <div class="box" th:each="franchise : ${franchises}">
-            <a th:href="@{'franchise?name=' + ${franchise.name}}" class="box">
-                <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-                <strong><span th:text="${'Naam: ' + franchise.getName()}"> name </span></strong>
-                <strong><span th:text="${franchise.getGamesCount() + ' game(s)'}"> amount of games </span></strong>
-            </a>
+        <div th:each="franchise : ${franchises}">
+            <img alt="placeholder" class="flex-image" th:src="@{/square-placeholder.jpg}">
+            <strong th:text="${'Naam: ' + franchise.getName()}"> name</strong><br>
+            <strong th:text="${'Aantal: ' + franchise.getGamesCount() + ' game(s)'}"> amount of games </strong><br>
+            <a class="box" th:href="@{'franchise/edit/' + ${franchise.id}}">Edit</a>
+            <a class="box" th:href="@{'franchise/delete/' + ${franchise.id}}">Delete</a><br>
+            <a class="box" th:href="@{'franchise?name=' + ${franchise.name}}">Bekijk franchise</a>
         </div>
     </div>
 </main>

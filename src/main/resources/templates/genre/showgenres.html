@@ -20,11 +20,12 @@
     </div>
     <div class="flex-container">
         <div th:each="genre : ${genres}">
-            <a th:href="@{'genre?name=' + ${genre.name}}" class="box">
-                <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-                <strong><span th:text="${'Naam: ' + genre.name}"> name </span></strong>
-                <strong><span th:text="${genre.getFranchisesCount() + ' franchise(s)'}">  </span></strong>
-            </a>
+            <img alt="placeholder" class="flex-image" th:src="@{/square-placeholder.jpg}">
+            <strong th:text="${'Naam: ' + genre.name}"> name</strong><br>
+            <strong th:text="${'Aantal: ' + genre.getFranchisesCount() + ' franchise(s)'}"> </strong><br>
+            <a class="box" th:href="@{'genre/edit/' + ${genre.id}}">Edit</a>
+            <a class="box" th:href="@{'genre/delete/' + ${genre.id}}">Delete</a><br>
+            <a class="box" th:href="@{'genre?name=' + ${genre.name}}">Bekijk alle franchises</a>
         </div>
 
     </div>
