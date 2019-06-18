@@ -79,14 +79,23 @@ public class GamelibraryApplication {
         adventure.addFranchiseToGenre(franchise1);
 
         User user = new User();
-        user.setUsername("test");
-        user.setPassword("123");
+        user.setUsername("Admin");
+        user.setPassword("Admin01");
         user.setName("Tycho");
         user.setGenres(genres);
         user.setFranchises(franchises);
         user.setGames(games);
         users.add(user);
         user.setId(users.size());
+
+        User user1 = new User();
+        user1.setUsername("User1");
+        user1.setPassword("User01");
+        user1.setName("Semih");
+        users.add(user1);
+        user1.setId(users.size());
+        addDefaultToUser(user1);
+
 
 
     }

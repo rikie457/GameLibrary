@@ -25,11 +25,16 @@ public class RequestAuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession(false);
         String url = (request.getRequestURI());
+        //Zit link die de gebruiker wil bezoeken in de toegestaande url lijst?
         if (ALLOWED_URL_LIST.contains(url)) {
+            //Laat de gebruiker door.
             filterChain.doFilter(request, response);
+            //Is de gebruiker  niet inlogd?
         } else if (session == null || session.getAttribute("userid") == null) {
+            //Stuur de gebruiker door naar de login pagina.
             ((HttpServletResponse) response).sendRedirect("/login");
         } else {
+            //Laat de gebruiker door.
             filterChain.doFilter(request, response);
         }
     }
