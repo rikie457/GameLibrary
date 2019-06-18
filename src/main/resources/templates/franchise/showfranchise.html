@@ -14,8 +14,8 @@
     <div class="box" th:each="game : ${franchise.getGames()}">
         <a th:href="@{'game?name=' + ${game.name}}" class="box">
             <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-            <b><span th:text="${'Naam: ' + game.getName()}"> name </span></b>
-            <b><span th:text="${'&euro; ' + game.getPrice()}"> price</span></b>
+            <strong><span th:text="${'Naam: ' + game.getName()}"> name </span></strong>
+            <strong><span th:text="${'&euro; ' + game.getPrice()}"> price</span></strong>
         </a>
     </div>
 </div>

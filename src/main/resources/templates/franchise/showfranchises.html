@@ -22,8 +22,8 @@
         <div class="box" th:each="franchise : ${franchises}">
             <a th:href="@{'franchise?name=' + ${franchise.name}}" class="box">
                 <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-                <b><span th:text="${'Naam: ' + franchise.getName()}"> name </span></b>
-                <b><span th:text="${franchise.getGamesCount() + ' game(s)'}"> amount of games </span></b>
+                <strong><span th:text="${'Naam: ' + franchise.getName()}"> name </span></strong>
+                <strong><span th:text="${franchise.getGamesCount() + ' game(s)'}"> amount of games </span></strong>
             </a>
         </div>
     </div>

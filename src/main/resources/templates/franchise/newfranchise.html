@@ -12,12 +12,12 @@
     <div class="add-page">
         <form action="*" th:action="@{/franchise/add}" th:object="${franchise}" method="post">
             <input placeholder="Franchise naam" type="text" th:field="*{name}"/>
-            <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+            <strong th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</strong>
             Genre:
             <select th:field="*{genreid}">
                 <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
             </select>
-            <b th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</b>
+            <strong th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</strong>
             <button type="submit">Submit</button>
             </table>
         </form>

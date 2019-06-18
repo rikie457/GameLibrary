@@ -60,7 +60,7 @@ main {
 }
 
 
-.box > b, .game-showcase > b {
+.box > strong, .game-showcase > b {
     display: block;
     margin-top: 5px;
 }
@@ -88,36 +88,58 @@ main {
     width: calc(100% - 30px);
     height: 100%;
     background-color: #b0aab3;
+    display: inline-block;
 }
 
-.game-showcase > img {
-    width: 400px;
-    height: 400px;
+@media only screen and (min-width: 768px) {
+    .game-showcase > img {
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        float: left;
+    }
+}
+
+
+.info {
+    display: inline-block;
+    padding: 4px;
+    margin: 0;
 }
 
 .flex-image {
-    display: block;
+    display: inline-block;
     width: 100%;
     height: 100%;
 }
 
+
 .add-box {
-    width:calc(100% - 60px);
-    display:block;
-    text-align:center;
+    width: calc(100% - 60px);
+    display: block;
     background-color: #b0aab3;
+    text-align: center;
     padding: 15px;
-    margin:15px;
+    margin: 15px;
+    color:black;
 }
 
 .add-page {
-    position:absolute;
+    position: absolute;
     background: #b0aab3;
-    text-align: center;
-    left:50%;
-    top:50%;
-    transform: translate(-50%,-50%);
-    padding:15px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+}
+
+.login-form {
+    position: absolute;
+    background: #b0aab3;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -132,8 +154,72 @@ main {
     }
 }
 
-table.errortable  td {
-    color:red;
+.edit-delete {
+    display: inline-block;
+    padding: 4px;
+}
+
+
+input, select, textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.login-form {
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #47A8E0;
+    color: white;
+
+    padding: 4px 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+}
+
+input[type=submit]:hover {
+    background-color: #468cc3;
+}
+
+form > strong {
+    color: red;
+    font-size: 12px;
+}
+
+.col {
+    float: left;
+    width: 100%;
+}
+
+.row {
+    margin-top: 4px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        margin-top: 0;
+    }
+}
+
+
+table.errortable td {
+    color: red;
     vertical-align: top;
     border: solid 1px #888;
     padding: 10px;

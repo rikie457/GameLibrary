@@ -12,17 +12,28 @@
 <main>
     <div class="add-page">
         <form action="*" th:action="@{/game/add}" th:object="${game}" method="post">
-            <input placeholder="Game naam" type="text" th:field="*{name}"/>
-            <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
-            <input min="0" placeholder="Prijs" type="number" th:field="*{price}"/>
-            <b th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</b>
-            <label for="franchise-select">Franchise: </label>
-            <select id="franchise-select" th:field="*{franchiseId}">
-                <option th:each="franchise : ${franchises}" th:text="${franchise.name}"
-                        th:value="${franchise.id}"></option>
-            </select>
-            <b th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchise}">Content error message</b>
-            <button type="submit">Submit</button>
+            <div class="row">
+                <label class="col" for="game-title">Naam: </label>
+                <input id="game-title" class="col" placeholder="Game naam" type="text" th:field="*{name}"/>
+            </div>
+            <strong th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</strong>
+            <div class="row">
+                <label class="col" for="game-price">Prijs: </label>
+                <input id="game-price" class="col" min="0" placeholder="Prijs" type="number" th:field="*{price}"/>
+            </div>
+            <strong th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</strong>
+            <div class="row">
+                <label class="col" for="franchise-select">Franchise: </label>
+                <select class="col" id="franchise-select" th:field="*{franchiseId}">
+                    <option th:each="franchise : ${franchises}" th:text="${franchise.name}"
+                            th:value="${franchise.id}"></option>
+                </select>
+            </div>
+            <strong th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchise}">Content error
+                message</strong>
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
         </form>
     </div>
 </main>

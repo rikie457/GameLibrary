@@ -8,26 +8,24 @@
 <nav th:replace="general/fragments :: nav"></nav>
 
 <main>
-    <header><h1>Login</h1></header>
-    <form th:action="@{/login}" method='post'>
-        <table>
-            <tr th:if="${error}">
-                <td>error:</td>
-                <td><p th:text="${error}"></p></td>
-            </tr>
-            <tr>
-                <td>User:</td>
-                <td><input type='text' name='username' value=''></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type='password' name='password'/></td>
-            </tr>
-            <tr>
-                <td><input name="submit" type="submit" value="submit"/></td>
-            </tr>
-        </table>
-    </form>
-    <a th:href="@{/register}">Geen account?</a>
+    <section class="login-form">
+        <header><h1>Login</h1></header>
+        <form th:action="@{/login}" method='post'>
+            <div class="row">
+                <label class="col" for="username"> User:</label>
+                <input class="col" type='text' id="username" name='username' value=''>
+            </div>
+            <div class="row">
+                <label class="col" for="password">Password:</label>
+                <input class="col" type='password' id="password" name='password'/>
+            </div>
+            <div class="row">
+                <input name="submit" type="submit" value="submit"/>
+            </div>
+
+            <strong th:text="${error}"></strong>
+            <a th:href="@{/register}">Geen account?</a>
+        </form>
+    </section>
 </main>
 </body>

@@ -19,19 +19,9 @@ public class GameLibraryController {
     @GetMapping("/")
 
     public String index(HttpServletRequest request, Model model, HttpSession session) {
-        Cookie[] cookies = request.getCookies();
-        Cookie cookie;
-        String value = null;
-        for (int i = 0; i < cookies.length; i++) {
-            cookie = cookies[i];
-            if (cookie.getName().equals("lastlogin")) {
-                value = cookie.getValue();
-            }
-        }
-        if (value == null) {
-            value = "No last visit";
-        }
         User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Cookie cookie = Utility.searchCookie(request,  Integer.toString(user.getId()));
+        String value = Utility.getCookieValue(cookie);
         model.addAttribute("nameuser", user.getName());
         model.addAttribute("lastlogin", value);
 
@@ -39,9 +29,13 @@ public class GameLibraryController {
     }
 
     @PostMapping("/")
-    public String processSearch(HttpSession session, Model model, @RequestParam("query") String query) {
+    public String processSearch(HttpServletRequest request, HttpSession session, Model model, @RequestParam("query") String query) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
+        Cookie cookie = Utility.searchCookie(request,  Integer.toString(user.getId()));
+        String value = Utility.getCookieValue(cookie);
+        model.addAttribute("nameuser", user.getName());
+        model.addAttribute("lastlogin", value);
         if (query != null) {
-            User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
             ArrayList<Object> results = user.searchAll(query);
             model.addAttribute("results", results);
             model.addAttribute("query", query);

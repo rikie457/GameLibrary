@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="franchise" type="nl.semtech.gamelibrary.model.Franchise"*/-->
 <!--/*@thymesVar id="activeProfiles" type="java.lang.String"*/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
@@ -17,14 +16,14 @@
                   th:method="post">
                 <input placeholder="id" type="number" readonly th:field="*{id}">
                 <input placeholder="Naam" type="text" th:field="*{name}"/>
-                <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+                <strong th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</strong>
                 Genre
                 <select th:field="*{genreid}">
                     <option th:each="dropdownitem : ${genres}" th:text="${dropdownitem.name}"
                             th:value="${dropdownitem.id}"
                             th:selected="${dropdownitem.id} == ${franchise.genreid}"></option>
                 </select>
-                <b th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</b>
+                <strong th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</strong>
                 <input placeholder="Oude genre id" name="oldgenreid" type="hidden" th:value="*{genreid}">
                 <button type="submit">Submit</button>
             </form>

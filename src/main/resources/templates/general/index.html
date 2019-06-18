@@ -27,7 +27,7 @@
     <section th:if="${results} != null">
         <div th:each="result : ${results}">
             <a th:href="${'/' + result.getLink()}">
-                <b><span th:text="${'Naam: ' + result.getName()}"></span></b>
+                <strong><span th:text="${'Naam: ' + result.getName()}"></span></strong>
             </a>
         </div>
     </section>

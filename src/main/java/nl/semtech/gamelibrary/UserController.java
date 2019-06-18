@@ -78,24 +78,22 @@ public class UserController {
 
     @GetMapping("/logout")
     public String processLogout(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+        User user = GamelibraryApplication.getUserById((int) session.getAttribute("userid"));
         session.invalidate();
         Cookie[] cookies = request.getCookies();
-        Cookie oldcookie = null, cookie = null;
+        Cookie oldcookie = null, cookie;
+
         for (int i = 0; i < cookies.length; i++) {
             cookie = cookies[i];
-            if (cookie.getName().equals("lastlogin")) {
-                System.out.println("OLD FOUND!");
-                System.out.println(cookie.getName() + " " + cookie.getValue());
+            if (cookie.getName().equals(Integer.toString(user.getId()))) {
                 oldcookie = cookie;
             }
         }
         if (oldcookie == null) {
-            System.out.println("NEW!");
-            cookie = new Cookie("lastlogin", new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Date()));
+            cookie = new Cookie(Integer.toString(user.getId()), new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Date()));
             cookie.setMaxAge(60 * 60 * 24 * 365);
             response.addCookie(cookie);
         } else {
-            System.out.println("REPLACE!");
             oldcookie.setValue(new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss").format(new Date()));
             response.addCookie(oldcookie);
         }
