@@ -12,42 +12,24 @@
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
     <section th:if="${game} != null">
-        <form action="*" th:action="@{/game/edit/__${game.id}__}" th:object="${game}" th:method="post">
-            <table>
-                <tr>
-                    <td>Id:</td>
-                    <td><input type="number" readonly th:field="*{id}"></td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" th:field="*{name}"/></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
-                </tr>
-                <tr>
-                    <td>Price:</td>
-                    <td><input type="number" th:field="*{price}"/></td>
-                    <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</td>
-                </tr>
-                <tr>
-                    <td>Franchise</td>
-                    <td>
-                        <select th:field="*{franchiseId}">
-                            <option th:each="dropdownitem : ${franchises}" th:text="${dropdownitem.name}"
-                                    th:value="${dropdownitem.id}"
-                                    th:selected="${dropdownitem.id} == ${game.franchiseId}"></option>
-                        </select>
-                    <td th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchiseId}">Content error message
-                    </td>
-                    </td>
-                    <td><input name="oldfranchiseid" type="hidden" th:value="*{franchiseId}"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit">Submit</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div class="add-page">
+            <form action="*" th:action="@{/game/edit/__${game.id}__}" th:object="${game}" th:method="post">
+                <input placeholder="id" type="number" readonly th:field="*{id}">
+                <input placeholder="Naam" type="text" th:field="*{name}"/>
+                <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+                <input placeholder="Prijs" type="number" th:field="*{price}"/>
+                <b th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</b>
+                Franchise
+                <select th:field="*{franchiseId}">
+                    <option th:each="dropdownitem : ${franchises}" th:text="${dropdownitem.name}"
+                            th:value="${dropdownitem.id}"
+                            th:selected="${dropdownitem.id} == ${game.franchiseId}"></option>
+                </select>
+                <b th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchiseId}">Content error message</b>
+                <input placeholder="Oude franchise id" name="oldfranchiseid" type="hidden" th:value="*{franchiseId}">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </section>
     <section th:unless="${game} != null">
         <h1>No game found</h1>

@@ -3,25 +3,30 @@
 <!--/@thymesVar id="franchises" type="nl.semtech.gamelibrary.model.Franchise"/-->
 <!--/@thymesVar id="activeProfiles" type="java.lang.String"/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head  th:replace="general/fragments :: head">
+<head th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-   <title id="pageTitle">Alle franchises</title>
+    <title id="pageTitle">Alle franchises</title>
 </head>
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
-<div th:if="${franchises.empty}">
-    <a> No franchises Available </a>
-</div>
-<div class="flex-container">
-    <div class="box" th:each="franchise : ${franchises}">
-        <a th:href="@{'franchise?name=' + ${franchise.name}}" class="box">
-            <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
-            <b><span th:text="${'Naam: ' + franchise.getName()}"> name </span></b>
-            <b><span th:text="${franchise.getGamesCount() + ' game(s)'}"> amount of games </span></b>
+    <div th:if="${franchises.empty}">
+        <a> No franchises Available </a>
+    </div>
+    <div>
+        <a th:href="@{'franchise/add'}" class="add-box">
+            Maak franchise aan
         </a>
     </div>
-</div>
+    <div class="flex-container">
+        <div class="box" th:each="franchise : ${franchises}">
+            <a th:href="@{'franchise?name=' + ${franchise.name}}" class="box">
+                <img class="flex-image" th:src="@{/square-placeholder.jpg}" alt="placeholder">
+                <b><span th:text="${'Naam: ' + franchise.getName()}"> name </span></b>
+                <b><span th:text="${franchise.getGamesCount() + ' game(s)'}"> amount of games </span></b>
+            </a>
+        </div>
+    </div>
 </main>
 </body>
 </html>

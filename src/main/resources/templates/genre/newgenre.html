@@ -1,30 +1,21 @@
-
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="genre" type="nl.semtech.gamelibrary.model.Genre"*/-->
 <!-- Workaround: https://youtrack.jetbrains.com/issue/IDEA-132738 -->
-<head  th:replace="general/fragments :: head">
+<head th:replace="general/fragments :: head">
     <meta charset="UTF-8">
-   <title id="pageTitle">Voeg genre toe</title>
+    <title id="pageTitle">Voeg genre toe</title>
 </head>
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
-<form action="*" th:action="@{/genre/add}" th:object="${genre}" method="post">
-    <table>
-        <tr>
-            <td>Title:</td>
-            <td><input type="text" th:field="*{name}"/></td>
-            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Submit</button>
-            </td>
-        </tr>
-    </table>
-</form>
+    <div class="add-page">
+        <form action="*" th:action="@{/genre/add}" th:object="${genre}" method="post">
+            <input placeholder="Genre titel" type="text" id="name" th:field="*{name}"/>
+            <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </main>
 </body>
 </html>

@@ -12,36 +12,23 @@
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
     <section th:if="${franchise} != null">
-        <form action="*" th:action="@{/franchise/edit/__${franchise.id}__}" th:object="${franchise}" th:method="post">
-            <table>
-                <tr>
-                    <td>Id:</td>
-                    <td><input type="number" readonly th:field="*{id}"></td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" th:field="*{name}"/></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
-                </tr>
-                <tr>
-                    <td>Genre</td>
-                    <td>
-                        <select th:field="*{genreid}">
-                            <option th:each="dropdownitem : ${genres}" th:text="${dropdownitem.name}"
-                                    th:value="${dropdownitem.id}"
-                                    th:selected="${dropdownitem.id} == ${franchise.genreid}"></option>
-                        </select>
-                    <td th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</td>
-                    </td>
-                    <td><input name="oldgenreid" type="hidden" th:value="*{genreid}"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit">Submit</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div class="add-page">
+            <form action="*" th:action="@{/franchise/edit/__${franchise.id}__}" th:object="${franchise}"
+                  th:method="post">
+                <input placeholder="id" type="number" readonly th:field="*{id}">
+                <input placeholder="Naam" type="text" th:field="*{name}"/>
+                <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+                Genre
+                <select th:field="*{genreid}">
+                    <option th:each="dropdownitem : ${genres}" th:text="${dropdownitem.name}"
+                            th:value="${dropdownitem.id}"
+                            th:selected="${dropdownitem.id} == ${franchise.genreid}"></option>
+                </select>
+                <b th:if="${#fields.hasErrors('genreid')}" th:errors="*{genreid}">Content error message</b>
+                <input placeholder="Oude genre id" name="oldgenreid" type="hidden" th:value="*{genreid}">
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </section>
     <section th:unless="${franchise} != null">
         <h1>No franchise found</h1>

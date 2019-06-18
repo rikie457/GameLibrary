@@ -10,35 +10,21 @@
 <body>
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
-    <form action="*" th:action="@{/game/add}" th:object="${game}" method="post">
-        <table>
-            <tr>
-                <td>Name:</td>
-                <td><input type="text" th:field="*{name}"/></td>
-                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td><input type="number" th:field="*{price}"/></td>
-                <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</td>
-            </tr>
-            <tr>
-                <td>Franchise</td>
-                <td>
-                    <select th:field="*{franchiseId}">
-                        <option th:each="franchise : ${franchises}" th:text="${franchise.name}"
-                                th:value="${franchise.id}"></option>
-                    </select>
-                </td>
-                <td th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchise}">Content error message</td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="submit">Submit</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="add-page">
+        <form action="*" th:action="@{/game/add}" th:object="${game}" method="post">
+            <input placeholder="Game naam" type="text" th:field="*{name}"/>
+            <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+            <input min="0" placeholder="Prijs" type="number" th:field="*{price}"/>
+            <b th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Content error message</b>
+            <label for="franchise-select">Franchise: </label>
+            <select id="franchise-select" th:field="*{franchiseId}">
+                <option th:each="franchise : ${franchises}" th:text="${franchise.name}"
+                        th:value="${franchise.id}"></option>
+            </select>
+            <b th:if="${#fields.hasErrors('franchiseId')}" th:errors="*{franchise}">Content error message</b>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </main>
 </body>
 </html>

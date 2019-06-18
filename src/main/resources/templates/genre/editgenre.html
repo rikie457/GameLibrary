@@ -12,24 +12,14 @@
 <nav th:replace="general/fragments :: nav"></nav>
 <main>
     <section th:if="${genre} != null">
-        <form action="*" th:action="@{/genre/edit/__${genre.id}__}" th:object="${genre}" th:method="post">
-            <table>
-                <tr>
-                    <td>Id:</td>
-                    <td><input type="number" readonly th:field="*{id}"></td>
-                </tr>
-                <tr>
-                    <td>Name:</td>
-                    <td><input type="text" th:field="*{name}"/></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</td>
-                </tr>
-                <tr>
-                    <td>
-                        <button type="submit">Submit</button>
-                    </td>
-                </tr>
-            </table>
-        </form>
+        <div class="add-page">
+            <form action="*" th:action="@{/genre/edit/__${genre.id}__}" th:object="${genre}" th:method="post">
+                <input placeholder="id" type="number" readonly th:field="*{id}">
+                <input placeholder="Genre naam" type="text" th:field="*{name}"/>
+                <b th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error message</b>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     </section>
     <section th:unless="${genre} != null">
         <h1>No genre found</h1>

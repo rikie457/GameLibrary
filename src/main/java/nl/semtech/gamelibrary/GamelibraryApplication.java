@@ -124,10 +124,10 @@ public class GamelibraryApplication {
         return null;
     }
 
+
     public static void addDefaultToUser(User user) {
         user.getGenres().add(defaultge);
         user.getFranchises().add(defaultfr);
     }
-
 }
 
